@@ -1,0 +1,32 @@
+---- Packages Used ----
+1 nodemon
+2 express
+3 ejs
+4 bodyparser
+
+---- Commands Used in terminal
+1 npm init
+2 npm install --save-dev nodemon
+3 npm install --save express
+4 npm install --save ejs
+5 npm install --save body-parser
+
+---- Files ----
+1 app.js 
+2 
+3
+4
+
+1. - Creating app.js
+   - Initializing node package manager 
+
+   - Added Start to scripts in package.json
+    "scripts": {
+     "test": "echo \"Error: no test specified\" && exit 1",
+     "start":"node app.js"
+     }
+
+   - Installing important packages nodemon, express, ejs, bodyparser
+   -
+   -
+   -
