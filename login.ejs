@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= pageTitle%>
+    </title>
+    <link rel="stylesheet" href="./css/util.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <main>
+        <section class="loginPage">
+            <div class="loginImage">
+                <p style="line-height: 0;">Log In and </p>
+                <p>Book WeClean Services</p>
+                <img style="width: 400px;" src="./img/loginPage.png" alt="">
+                    alt="">
+                <p class="tinytext">@WeClean</p>
+            </div>
+            <div class="loginForm">
+                <div class="topBarLogin">
+                    <a href="/">Home</a>
+                    <p>Don't have an account yet? &nbsp; <a class="signupBtn" href="/signup">Sign Up</a> </p>
+                </div>
+                <section class="centerContainer">
+                    <section class="loginFormContainer">
+                        <img src="./img/logo.png" alt="">
+                        <p>Hello, who’s this?</p>
+                        <form action="/login" method="post">
+                            <label for="Email">Email</label>
+                            <input value="" type="text" name="email" placeholder="japneet@gmail.com">
+                            <label for="Email">Password</label>
+                            <input value="" name="password" type="password" placeholder="At least 6 characters">
+                            <button type="submit">LogIn to WeClean</button>
+                        </form>
+                    </section>
+                </section>
+            </div>
+        </section>
+    </main>
+
+
+</body>
+
+</html>

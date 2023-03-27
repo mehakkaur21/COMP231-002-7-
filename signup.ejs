@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= pageTitle%>
+    </title>
+    <link rel="stylesheet" href="./css/util.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <main>
+        <section class="loginPage">
+            <div class="loginImage">
+                <p style="line-height: 0;">Sign Up and </p>
+                <p>Book WeClean Services</p>
+                <img style="width: 400px;" src="./img/signupPage.png" alt="">
+                alt="">
+                <p class="tinytext">@WeClean</p>
+            </div>
+            <div class="loginForm">
+                <div class="topBarLogin">
+                    <a href="/">Home</a>
+                    <p>Already have an account?
+                      &nbsp;  <a class="loginBtn" href="/login">Log In</a>
+                    </p>
+                </div>
+                <section class="centerContainer">
+                    <section class="loginFormContainer">
+                        <img src="./img/logo.png" alt="">
+                        <p>Get dozens of trusted professionals near you to take care of your home and offices.</p>
+
+                        <form style="padding-bottom: 50px;" action="/signup" method="Post">
+                            <label for="FirstName">First Name</label>
+                            <input value="" name="firstName" type="text" placeholder="John">
+                            <label for="LastName">Last Name</label>
+                            <input value="" name="lastName" type="text" placeholder="Smith">
+                            <label for="Email">Email</label>
+                            <input value="" name="email" type="text" placeholder="japneet@gmail.com">
+                            <label for="Password">Password</label>
+                            <input value="" name="password" type="password" placeholder="At least 6 characters">
+                            <label for="ConfirmPassword">Confirm Password</label>
+                            <input value="" type="password" name="confirmPassword" placeholder="At least 6 characters">
+                            <button type="submit">Create Account</button>
+                        </form>
+                    </section>
+                </section>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
