@@ -23,8 +23,11 @@
     /* font-family: 'Open Sans', sans-serif; */
     /* font-family: 'Roboto', sans-serif; */
     /* font-family: 'Lato', sans-serif; */
-}
 
+}
+html{
+    scroll-behavior: smooth;
+}
 
 ::selection {
     background-color: #C3CFE2;

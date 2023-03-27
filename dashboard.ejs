@@ -10,6 +10,8 @@
     </title>
     <link rel="stylesheet" href="./css/util.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
@@ -17,7 +19,34 @@
 </head>
 
 <body>
-dashboard
+    <aside id="sidebarDashboard" >
+        <div style="position:absolute; right: 30px; top: 30px;">
+            <button class="sidebarDashboardClose"><i class="fa-solid fa-arrow-left"></i></button>
+        </div>
+        <div class="sidebarLogo">
+            <a href="/">
+                <img src="./img/logo.png" alt="">
+            </a>
+        </div>
+        <div class="dashboardLinks">
+            <ul>
+                <li>
+                    <a href="/newService"><i class="fa-solid fa-plus"></i> &nbsp; Book Service</a>
+                    <a href="/manageServices"><i class="fa-solid fa-cubes"></i> &nbsp; Manage Services</a>
+                </li>
+            </ul>
+        </div>
+        <form action="">
+            <button><i class="fa-solid fa-right-from-bracket"></i> &nbsp; Logout</button>
+        </form>
+    </aside>
+    <div id="dashboardContainer">
+        <div id="topBar" class="flexRow justifySpaceBetween">
+            <h3>Dashboard / <span class="colored">Book Service</span></h3>
+          <button class="sidebarDashboardToggle"><i class="fas fa-bars"></i></button>
+        </div>
+      
+    </div>
+    <script src="./js/dashboardSidebar.js"></script>
 </body>
-
 </html>

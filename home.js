@@ -19,4 +19,10 @@ router.get('/signup', (req, res, next) => {
     })
 })
 
+router.get('/dashboard',(req,res,next)=>{
+    res.render('dashboard', {
+        pageTitle: 'Dashboard | WeClean',
+    })
+})
+
 exports.router = router;
