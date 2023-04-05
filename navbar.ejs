@@ -20,9 +20,7 @@
             <a href="#">Contact Us</a>
         </li>
 
-        <li>
-            <a href="/dashboard">Dashboard</a>
-        </li>
+
 
         <!-- <div class="dropdown">
             <li class="dropdownList">Services<i style="margin:3px; font-size: 12px;"
@@ -39,12 +37,20 @@
             </div>
         </div> -->
     </ul>
-    <ul class="loginSignup" ">
-        <li>
-            <a class=" loginBtn" href="/login">LogIn</a>
-        </li>
-        <li>
-            <a class="signupBtn" href="/signup">SignUp</a>
-        </li>
-    </ul>
+    <%if(isLoggedIn){%>
+        <ul class="links">
+            <li>
+                <a href="/dashboard">Dashboard</a>
+            </li>
+        </ul>
+        <%}else{%>
+            <ul class="loginSignup">
+                <li>
+                    <a class=" loginBtn" href="/login">LogIn</a>
+                </li>
+                <li>
+                    <a class="signupBtn" href="/signup">SignUp</a>
+                </li>
+            </ul>
+            <%}%>
 </aside>
