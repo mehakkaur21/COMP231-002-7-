@@ -1,52 +1,120 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('./dashboardIncludes/dashboardHead.ejs') %>
+    <!-- Sidebar -->
+    <%- include('./dashboardIncludes/sidebarDashboard.ejs') %>
+        <div id="dashboardContainer">
+            <div id="topBar" class="flexRow justifySpaceBetween">
+                <h3>Dashboard / <span class="colored">Book Service</span></h3>
+                <button class="sidebarDashboardToggle"><i class="fas fa-bars"></i></button>
+            </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <%= pageTitle%>
-    </title>
-    <link rel="stylesheet" href="./css/util.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/dashboard.css">
-    
+            <section id="bookingForm" class="dashboardContent card">
+                <h2>Fill this form to book your service</h2>
+                <form action="/bookingForm" method="post" style="padding: 10px;">
+                    <!-- First Name , Last Name -->
+                    <div class="flexRow flexRowToColumn alignItemsCenter" style="width:
+                    100%">
+                        <div class="flexInputDiv">
+                            <label for="FirstName">First Name</label>
+                            <input value="" type="text" name="firstName" placeholder="John">
+                        </div>
+                        <div class="flexInputDiv">
+                            <label for="LastName">Last Name</label>
+                            <input value="" type="text" name="lastName" placeholder="Doe">
+                        </div>
+                    </div>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
 
-<body>
-    <aside id="sidebarDashboard" >
-        <div style="position:absolute; right: 30px; top: 30px;">
-            <button class="sidebarDashboardClose"><i class="fa-solid fa-arrow-left"></i></button>
+                    <!-- Email , Contact Number -->
+                    <div class="flexRow flexRowToColumn alignItemsCenter" style="width:
+                    100%">
+                        <div class="flexInputDiv">
+                            <label for="FirstName">Email</label>
+                            <input value="" type="email" name="email" placeholder="john@gmail.com">
+                        </div>
+                        <div class="flexInputDiv">
+                            <label for="Email">Contact Number</label>
+                            <input value="" type="text" name="contactNumber" placeholder="+1 (XXX) XXX-XXXX">
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <label for="address">Address</label>
+                    <input value="" type="text" name="contactNumber" placeholder="+1 (XXX) XXX-XXXX">
+
+                    <!-- Pin , Location Type -->
+                    <div class="flexRow flexRowToColumn alignItemsCenter" style="width:
+                                        100%">
+                        <div class="flexInputDiv">
+                            <label for="pinCode">Pin Code</label>
+                            <input value="" type="email" name="pinCode" placeholder="110018">
+                        </div>
+                        <div class="flexInputDiv">
+                            <label for="locationType">Location Type (Home, Office, Studio, Etc)</label>
+                            <input value="" type="text" name="locationType" placeholder="Home">
+                        </div>
+                    </div>
+                    <!-- Date -->
+                    <label for="date">Date On Which Service Is Required</label>
+                    <input type="date" name="myDateInput" id="myDateInput">
+
+                    <!-- Starting Time And Service Type -->
+                    <div class="flexRow flexRowToColumn alignItemsCenter" style="width:
+                                        100%">
+                        <div class="flexInputDiv">
+                            <select
+                                style="width: 100%; text-align: center; padding: 20px; font-size: 18px; margin-bottom: 10px;">
+                                <option value="null">Select Starting Time</option>
+                                <option value="8:00 AM">8:00 AM</option>
+                                <option value="9:00 AM">9:00 AM</option>
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="12:00 PM">12:00 PM</option>
+                                <option value="1:00 PM">1:00 PM</option>
+                                <option value="2:00 PM">2:00 PM</option>
+                                <option value="3:00 PM">3:00 PM</option>
+                                <option value="4:00 PM">4:00 PM</option>
+                                <option value="5:00 PM">5:00 PM</option>
+                                <option value="6:00 PM">6:00 PM</option>
+                                <option value="7:00 PM">7:00 PM</option>
+                            </select>
+                        </div>
+                        <div class="flexInputDiv">
+                            <select
+                                style="width: 100%; text-align: center; padding: 20px; font-size: 18px; margin-bottom: 10px;">
+                                <option value="null">Select Your Desired Service</option>
+                                <option value="houseCleaning">House Cleaning</option>
+                                <option value="officeCleaning">Office Cleaning</option>
+                                <option value="carpetCleaning">Carpet Cleaning</option>
+                                <option value="windowCleaning">Window Cleaning</option>
+                                <option value="pressureWashing">Pressure Washing</option>
+                                <option value="janitorialServices">Janitorial Services</option>
+                                <option value="moveInCleaning">Move-In Cleaning</option>
+                                <option value="moveOutCleaning">Move-Out Cleaning</option>
+                                <option value="postConstructionCleaning">Post-Construction Cleaning</option>
+                                <option value="deepCleaning">Deep Cleaning</option>
+                                <option value="upholsteryCleaning">Upholstery Cleaning</option>
+                                <option value="tileAndGroutCleaning">Tile and Grout Cleaning</option>
+                                <option value="airDuctCleaning">Air Duct Cleaning</option>
+                                <option value="garageCleaning">Garage Cleaning</option>
+                                <option value="carWash">Car Wash</option>
+                                <option value="gutterCleaning">Gutter Cleaning</option>
+                                <option value="poolCleaning">Pool Cleaning</option>
+                                <option value="upholsteryCleaning">Upholstery Cleaning</option>
+                                <option value="drivewayCleaning">Driveway Cleaning</option>
+                                <option value="ovenCleaning">Oven Cleaning</option>
+                                <option value="grillCleaning">Grill Cleaning</option>
+                                <option value="other">Other</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flexColumn">
+                        <label for="">Details and Requirements</label>
+                        <textarea name="" id="" cols="30" rows="8"></textarea>
+                    </div>
+                    <button class="btn btn-red" style="border: none; cursor: pointer;">Book Service</button>
+                </form>
+            </section>
         </div>
-        <div class="sidebarLogo">
-            <a href="/">
-                <img src="./img/logo.png" alt="">
-            </a>
-        </div>
-        <div class="dashboardLinks">
-            <ul>
-                <li>
-                    <a href="/newService"><i class="fa-solid fa-plus"></i> &nbsp; Book Service</a>
-                    <a href="/manageServices"><i class="fa-solid fa-cubes"></i> &nbsp; Manage Services</a>
-                </li>
-            </ul>
-        </div>
-        <form action="">
-            <button><i class="fa-solid fa-right-from-bracket"></i> &nbsp; Logout</button>
-        </form>
-    </aside>
-    <div id="dashboardContainer">
-        <div id="topBar" class="flexRow justifySpaceBetween">
-            <h3>Dashboard / <span class="colored">Book Service</span></h3>
-          <button class="sidebarDashboardToggle"><i class="fas fa-bars"></i></button>
-        </div>
-      
-    </div>
-    <script src="./js/dashboardSidebar.js"></script>
-</body>
-</html>
+
+        <%- include('./dashboardIncludes/dashboardEnd.ejs') %>

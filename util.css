@@ -25,7 +25,8 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-.redGradientText{
+
+.redGradientText {
     background: linear-gradient(to right, #e55869 0%, #EA384D 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -136,7 +137,8 @@ p {
 .alignItemsCenter {
     align-items: center;
 }
-.textAlignCenter{
+
+.textAlignCenter {
     text-align: center;
 }
 
@@ -224,6 +226,23 @@ footer img {
     margin: 10px;
     border-radius: 10px;
 }
-.padding20{
+
+.padding20 {
     padding: 20px;
+}
+
+.grid2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.smallBtn {
+    padding: 13px 20px;
+    font-size: 16px;
+}
+
+@media screen and (max-width:900px) {
+    .grid2 {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }

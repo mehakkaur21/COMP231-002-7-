@@ -86,6 +86,10 @@
 .colored {
 color: var(--red);
 }
+.colored2 {
+color: var(--lblue);
+}
+
 .sidebarDashboardToggle,.sidebarDashboardClose{
     background: transparent;
     font-size: 25px;
@@ -118,4 +122,34 @@ transform: translateX(-100%);
     #dashboardContainer{
         margin-left: 0;
     }
+}
+@media screen and (min-width:850px) {
+    .dashboardContent{
+        margin: 20px;
+    }
+}
+.dashboardContent{
+    border-radius: 0;
+}
+.flexInputDiv{
+    width: 50%;
+}
+
+.bookedServices p{
+    text-align: left;
+}
+ .bookedServices h3{
+background-color: rgb(243, 243, 243) ;
+color: var(--lblue);
+padding: 20px;
+letter-spacing: 1px;
+margin-bottom: 10px;
+}
+.Pending,.Ongoing{
+    background-color: red;
+    color: white;
+    padding: 5px 8px;
+}
+.Ongoing{
+    background-color: var(--lblue);
 }

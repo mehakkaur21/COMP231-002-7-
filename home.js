@@ -9,18 +9,23 @@ router.get('/', (req, res, next) => {
 })
 router.get('/login', (req, res, next) => {
     console.log('Login')
-    res.render('login', {
+    res.render('auth/login', {
         pageTitle: 'Login | WeClean',
     })
 })
 router.get('/signup', (req, res, next) => {
-    res.render('signup', {
+    res.render('auth/signup', {
         pageTitle: 'Signup | WeClean',
     })
 })
 
 router.get('/dashboard',(req,res,next)=>{
     res.render('dashboard', {
+        pageTitle: 'Dashboard | WeClean',
+    })
+})
+router.get('/manageServices',(req,res,next)=>{
+    res.render('dashboardIncludes/manageServices', {
         pageTitle: 'Dashboard | WeClean',
     })
 })

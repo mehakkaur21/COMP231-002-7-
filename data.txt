@@ -20,13 +20,13 @@
 1. - Creating app.js
    - Initializing node package manager 
 
+   - Installing important packages nodemon, express, ejs, bodyparser
+   - Creating folders Model, Views, Controllers, Routes, public
+   
    - Added Start to scripts in package.json
     "scripts": {
      "test": "echo \"Error: no test specified\" && exit 1",
-     "start":"node app.js"
+     "start":"nodemon app.js"
      }
-
-   - Installing important packages nodemon, express, ejs, bodyparser
-   -
-   -
+  
    -

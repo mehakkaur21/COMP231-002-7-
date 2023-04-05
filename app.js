@@ -6,7 +6,7 @@ const app = express();
 const path = require('path');
 
 // Serving Public folder as static for assets and css
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'Public')));
 
 // app.use('/',(req,res,next)=>{
 //   res.render('index.ejs');
