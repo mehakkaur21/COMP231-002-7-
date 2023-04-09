@@ -20,8 +20,14 @@ h1 {
     margin-bottom: 10px;
 }
 
-.greenGradientText{
+.greenGradientText {
     background: linear-gradient(to right, rgb(75, 237, 237) 0%, rgb(2, 98, 98) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.redGradientText {
+    background: linear-gradient(to right, #e55869 0%, #EA384D 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -123,12 +129,17 @@ p {
 .justifyCenter {
     justify-content: center;
 }
-.justifySpaceBetween{
+
+.justifySpaceBetween {
     justify-content: space-between;
 }
 
 .alignItemsCenter {
     align-items: center;
+}
+
+.textAlignCenter {
+    text-align: center;
 }
 
 @media screen and (max-width:1000px) {
@@ -151,59 +162,87 @@ p {
     }
 }
 
-.placeCenter{
+.placeCenter {
     display: grid;
-    place-items: center ;
+    place-items: center;
 }
 
-.btn-fixed-bottom{
+.btn-fixed-bottom {
     position: fixed;
     bottom: 10px;
     right: 10px;
     flex-direction: row;
 }
 
-         
+
 .btn-red {
-    background-image: linear-gradient(to right, #D31027 0%, #EA384D  51%, #D31027  100%);
+    background-image: linear-gradient(to right, #D31027 0%, #EA384D 51%, #D31027 100%);
     padding: 15px 45px;
     text-align: center;
     text-transform: uppercase;
     transition: 0.5s;
     background-size: 200% auto;
-    color: white;            
+    color: white;
     box-shadow: 0 0 20px #eee;
     border-radius: 10px;
     display: block;
-  }
+}
 
-  .btn-red:hover {
-    background-position: right center; /* change the direction of the change here */
+.btn-red:hover {
+    background-position: right center;
+    /* change the direction of the change here */
     color: #fff;
     text-decoration: none;
-  }
-          
-  .btn-yellow {
-    background-image: linear-gradient(to right, #ffb347 0%, #ffcc33  51%, #ffb347  100%);
+}
+
+.btn-yellow {
+    background-image: linear-gradient(to right, #ffb347 0%, #ffcc33 51%, #ffb347 100%);
     padding: 15px 45px;
     text-align: center;
     text-transform: uppercase;
     transition: 0.5s;
     background-size: 200% auto;
-    color: white;            
+    color: white;
     box-shadow: 0 0 20px #eee;
     border-radius: 10px;
     display: block;
-  }
+}
 
-  .btn-yellow:hover {
-    background-position: right center; /* change the direction of the change here */
+.btn-yellow:hover {
+    background-position: right center;
+    /* change the direction of the change here */
     color: #fff;
     text-decoration: none;
-  }
- 
-  footer img{
+}
+
+footer img {
     width: 100px;
-  }
+}
 
+.card {
+    background-color: white;
+    padding: 14px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    margin: 10px;
+    border-radius: 10px;
+}
 
+.padding20 {
+    padding: 20px;
+}
+
+.grid2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.smallBtn {
+    padding: 13px 20px;
+    font-size: 16px;
+}
+
+@media screen and (max-width:900px) {
+    .grid2 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

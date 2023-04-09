@@ -23,8 +23,11 @@
     /* font-family: 'Open Sans', sans-serif; */
     /* font-family: 'Roboto', sans-serif; */
     /* font-family: 'Lato', sans-serif; */
-}
 
+}
+html{
+    scroll-behavior: smooth;
+}
 
 ::selection {
     background-color: #C3CFE2;
@@ -435,7 +438,7 @@ a {
 
     }
 
-   
+
 
     .sidebar-toggle {
         display: none;
@@ -538,6 +541,7 @@ a {
     #homePageHeader {
         padding-top: 20px;
     }
+
     .loginSignup {
         margin: 20px;
         display: flex;
@@ -617,4 +621,47 @@ a {
 .loginBtn:hover,
 .signupBtn:hover {
     opacity: 0.8;
+}
+
+.servicesCard {
+    width: 315px;
+    margin: 0;
+}
+
+.servicesCard .serviceImg {
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+}
+
+.servicesCard .serviceImg img {
+    height: 100%;
+}
+
+.card h2 {
+    color: var(--red);
+    text-align: center;
+    margin: 10px;
+}
+
+.card p {
+    text-align: center;
+}
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+    max-width: 1300px;
+    margin: auto;
+}
+
+@media screen and (max-width:800px) {
+    .servicesCard {
+        width: 100%;
+    }
+
+    .servicesCard .serviceImg {
+        height: 300px;
+    }
 }

@@ -1,0 +1,155 @@
+/* #mainArea{
+    background-color: aqua;
+    height: 300px;
+    width: 100%;
+} */
+
+/* Main */
+#dashboardContainer {
+    margin: 0;
+    margin-left: 300px;
+    transition: 0.3s all linear;
+    background-color: rgb(255, 255, 255);
+}
+
+/* Sidebar */
+#sidebarDashboard {
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    width: 300px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    transition: 0.3s all linear;
+    z-index: 1;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.sidebarLogo img {
+    width: 250px;
+}
+
+.sidebarLogo {
+    padding: 20px;
+    margin: 25px 0;
+}
+
+.dashboardLinks ul li {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboardLinks ul li a,
+#sidebarDashboard form button {
+    margin: 0 30px;
+    padding: 16px;
+    font-size: 19px;
+    cursor: pointer;
+    transition: 0.3s all linear;
+    letter-spacing: 1px;
+
+}
+
+.dashboardLinks ul li a {
+    color: var(--pinkRed);
+}
+
+.dashboardLinks ul li a:hover,
+#sidebarDashboard form button:hover {
+    padding-left: 24px;
+    background: linear-gradient(to right, teal 0%, #191819 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#sidebarDashboard form button {
+    background: transparent;
+    border: none;
+    color: var(--teal);
+}
+
+#sidebarDashboard form {
+    height: 100px;
+}
+#topBar {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+#topBar h3 {
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.colored {
+color: var(--red);
+}
+.colored2 {
+color: var(--lblue);
+}
+
+.sidebarDashboardToggle,.sidebarDashboardClose{
+    background: transparent;
+    font-size: 25px;
+    border: transparent;
+    margin-right: 10px;
+    cursor: pointer;
+    color: var(--lblue);
+    transition: 0.3s all linear;
+}
+.sidebarDashboardClose{
+    color: red;
+}
+.sidebarDashboardToggle:hover{
+    color: red;
+}
+.sidebarDashboardClose:hover{
+    color: var(--lblue);
+}
+
+.hideDashboardSidebar{
+transform: translateX(-100%);
+}
+.hideDashboardSidebar #dashboardContainer {
+    margin-left: 0px;
+}
+.marginFull{
+    margin-left: 0 !important;
+}
+@media screen and (max-width:850px) {
+    #dashboardContainer{
+        margin-left: 0;
+    }
+}
+@media screen and (min-width:850px) {
+    .dashboardContent{
+        margin: 20px;
+    }
+}
+.dashboardContent{
+    border-radius: 0;
+}
+.flexInputDiv{
+    width: 50%;
+}
+
+.bookedServices p{
+    text-align: left;
+}
+ .bookedServices h3{
+background-color: rgb(243, 243, 243) ;
+color: var(--lblue);
+padding: 20px;
+letter-spacing: 1px;
+margin-bottom: 10px;
+}
+.Pending,.Ongoing{
+    background-color: red;
+    color: white;
+    padding: 5px 8px;
+}
+.Ongoing{
+    background-color: var(--lblue);
+}

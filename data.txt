@@ -1,15 +1,29 @@
 ---- Packages Used ----
 1 nodemon
 2 express
-3 ejs
-4 bodyparser
+3  ejs
+4  bodyparser
+5  cookie-parser
+6  express-session
+7  connect-mongodb-session
+8  mongoose
+9  connect-flash
+10 bcryptjs
+11 express-validator
 
 ---- Commands Used in terminal
-1 npm init
-2 npm install --save-dev nodemon
-3 npm install --save express
-4 npm install --save ejs
-5 npm install --save body-parser
+1  npm init
+2  npm install --save-dev nodemon
+3  npm install --save express
+4  npm install --save ejs
+5  npm install --save body-parser
+6  npm install --save cookie-parser
+7  npm install --save express-session
+8  npm install --save connect-mongodb-session
+9  npm install --save mongoose
+10 npm install --save connect-flash
+11 npm install --save bcryptjs
+12 npm install --save express-validator
 
 ---- Files ----
 1 app.js 

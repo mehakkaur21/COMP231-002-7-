@@ -1,0 +1,56 @@
+<aside class="sidebar  phoneNav">
+    <div class="sidebar-header">
+        <img class="logo" src="./img/logo.png" alt="">
+        <button class="close-btn"><i class="fas fa-times"></i></button>
+    </div>
+    <ul class="links alignItemsCenter">
+        <li>
+            <a href="#">Home</a>
+        </li>
+
+        <li>
+            <a href="#">About</a>
+        </li>
+
+        <li>
+            <a href="#services">Services</a>
+        </li>
+
+        <li>
+            <a href="#">Contact Us</a>
+        </li>
+
+
+
+        <!-- <div class="dropdown">
+            <li class="dropdownList">Services<i style="margin:3px; font-size: 12px;"
+                    class="fa-solid fa-caret-down"></i></li>
+            <div style="left: -30px;" class="dropdown-content">
+                <section>
+                    <ul>
+                        <li><a style="" href="">Node Js Assignments</a></li>
+                        <li><a href="">Node Js Assignments</a></li>
+                        <li><a href="">Node Js Assignments</a></li>
+                        <li><a href="">Node Js Assignments</a></li>
+                    </ul>
+                </section>
+            </div>
+        </div> -->
+    </ul>
+    <%if(isLoggedIn){%>
+        <ul class="links">
+            <li>
+                <a href="/dashboard">Dashboard</a>
+            </li>
+        </ul>
+        <%}else{%>
+            <ul class="loginSignup">
+                <li>
+                    <a class=" loginBtn" href="/login">LogIn</a>
+                </li>
+                <li>
+                    <a class="signupBtn" href="/signup">SignUp</a>
+                </li>
+            </ul>
+            <%}%>
+</aside>
