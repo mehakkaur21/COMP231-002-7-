@@ -3,72 +3,157 @@
     <%- include('./sidebarDashboard.ejs') %>
         <div id="dashboardContainer">
             <div id="topBar" class="flexRow justifySpaceBetween">
-                <h3>Dashboard / <span class="colored">Book Service</span></h3>
+                <h3>Dashboard / <span class="colored">My Bookings</span></h3>
                 <button class="sidebarDashboardToggle"><i class="fas fa-bars"></i></button>
             </div>
+            <%if(message){%>
+                <div class="<%=messageClass%> dashboardContent">
+                    <p>
+                        <%= message%>
+                    </p>
+                </div>
+                <%}%>
+                    <% if(!bookings.length){ %>
+                        <article class="dashboardContent card bookedServices">
+                            <h2>Hey <%= user.firstName%>, You have not made any bookings yet</h2>
+                        </article>
+                        <% } %>
 
-            <article class="dashboardContent card bookedServices">
-                <h3>Requirement: House Cleaning</h3>
-                <div class="grid2  bookedServices">
-                    <p><span class="colored">Name:</span> mehak</p>
-                    <p><span class="colored">Email:</span> mehak</p>
-                    <p><span class="colored">Contact Number:</span> mehak</p>
-                    <p><span class="colored">Location Type:</span> mehak</p>
-                    <p><span class="colored">Pin Code:</span> mehak</p>
-                    <p><span class="colored">Starting Time:</span> 8:00 AM Onwards</p>
-                </div>
-                <p style="text-align: left;"><span class="colored">Address: </span><br> Lorem ipsum dolor sit amet.</p>
-                <p><span class="colored">Details And Requirements: </span>
-                    <br>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Nostrum, laudantium assumenda a est officia ab voluptate vitae modi sequi, autem eum aliquid facere
-                    ratione asperiores obcaecati, laborum illum dolores animi?
-                </p>
-                <p style="text-align: center;padding: 12px;margin-top: 10px; background-color: rgb(231, 231, 231);">
-                    <span class="colored"> Status:</span>
-                    <span class="Ongoing">Ongoing</span>
-                </p>
-                <p>Your Request Has Been Accepted By Our Cleaner</p>
-                <div class="card" style="background-color: rgb(241, 241, 241);">
-                    <h4 class="colored2">Cleaner Details</h4>
-                    <div class="grid2  bookedServices">
-                        <p><span class="colored2">Name:</span> mehak</p>
-                        <p><span class="colored2">Contact Number:</span> mehak</p>
-                    </div>
-                    <p> <span class="colored2">Message From Our Cleaner:</span> <br>Hey this is mehak, Thankyou
-                        for choosing One Step Away Cleaner. <br> I will be at your doorstep by 8:00 AM</p>
-                </div>
+                            <% bookings.forEach(booking=>{ %>
+                                <article class="dashboardContent card bookedServices">
+                                    <h3>Requirement: <%= booking.desiredService %>
+                                    </h3>
+                                    <div class="grid2  bookedServices">
+                                        <p><span class="colored">Name:</span>
+                                            <%= booking.firstName %>
+                                                <%= booking.lastName %>
+                                        </p>
+                                        <p><span class="colored">Email:</span>
+                                            <%= booking.email %>
+                                        </p>
+                                        <p><span class="colored">Contact Number:</span>
+                                            <%= booking.contactNumber %>
+                                        </p>
+                                        <p><span class="colored">Location Type:</span>
+                                            <%= booking.locationType %>
+                                        </p>
+                                        <p><span class="colored">Pin Code:</span>
+                                            <%= booking.pinCode %>
+                                        </p>
+                                        <p><span class="colored">Starting Time:</span>
+                                            <%= booking.startingTime %> Onwards
+                                        </p>
+                                        <p><span class="colored">Booked On:</span>
+                                            <%= booking.dateOfBooking %>, <%= booking.timeOfBooking %>
+                                        </p>
+                                    </div>
+                                    <p style="text-align: left;"><span class="colored">Address: </span><br>
+                                        <%= booking.address %>
+                                    </p>
+                                    <p><span class="colored">Details And Requirements: </span>
+                                        <br>
+                                        <%= booking.details %>
+                                    </p>
+                                    <p
+                                        style="text-align: center;padding: 12px;margin-top: 10px; background-color: rgb(231, 231, 231);">
+                                        <span class="colored"> Status:</span>
+                                        <span class="<%= booking.bookingStatus%>">
+                                            <%= booking.bookingStatus%>
+                                        </span>
+                                    </p>
+                                    <% if(booking.bookingStatus==='Ongoing' ){%>
+                                        <p>Your Request Has Been Accepted By Our Cleaner</p>
+                                        <div class="card" style="background-color: rgb(241, 241, 241);">
+                                            <h4 class="colored2">Cleaner Details</h4>
+                                            <div class="grid2  bookedServices">
+                                                <p><span class="colored2">Name:</span> mehak</p>
+                                                <p><span class="colored2">Contact Number:</span> mehak</p>
+                                            </div>
+                                            <p> <span class="colored2">Message From Our Cleaner:</span> <br>Hey this is
+                                                mehak, Thankyou
+                                                for choosing One Step Away Cleaner. <br> I will be at your doorstep by
+                                                8:00 AM</p>
+                                        </div>
+                                        <%}else if(booking.bookingStatus==='Pending' ){%>
+                                            <p>Your Request Will Be Accepted Soon By Our Cleaners</p>
+                                            <form action="/deleteBooking" method="post">
+                                                <div class="flexRow">
+                                                    <a href="/editBooking/<%=booking._id%>"
+                                                        class="btn btn-yellow smallBtn">Edit Details</a>
+                                                    <button type="submit"
+                                                        style="border: none; height: 48px; cursor: pointer; font-size: 15px; padding: 14px 16px;"
+                                                        class="btn btn-red">Cancel Booking</button>
+                                                    <input style="display: none;" name="bookingId" type="text"
+                                                        value="<%= booking._id%>">
+                                                </div>
+                                            </form>
+                                            <%}%>
 
-            </article>
-            <article class="dashboardContent card bookedServices">
-                <h3>Requirement: House Cleaning</h3>
-                <div class="grid2  bookedServices">
-                    <p><span class="colored">Name:</span> mehak</p>
-                    <p><span class="colored">Email:</span> mehak</p>
-                    <p><span class="colored">Contact Number:</span> mehak</p>
-                    <p><span class="colored">Location Type:</span> mehak</p>
-                    <p><span class="colored">Pin Code:</span> mehak</p>
-                    <p><span class="colored">Starting Time:</span> 8:00 AM Onwards</p>
-                </div>
-                <p style="text-align: left;"><span class="colored">Address: </span><br> Lorem ipsum dolor sit amet.</p>
-                <p><span class="colored">Details And Requirements: </span>
-                    <br>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Nostrum, laudantium assumenda a est officia ab voluptate vitae modi sequi, autem eum aliquid facere
-                    ratione asperiores obcaecati, laborum illum dolores animi?
-                </p>
-                <p style="text-align: center;padding: 12px; background-color: rgb(231, 231, 231);"><span
-                        class="colored"> Status:</span>
-                    <span class="Pending">Pending</span>
-                </p>
-                <p>Your Request Will Be Accepted Soon By Our Cleaners</p>
-                <div class="flexRow">
-                    <a href="" class="btn btn-yellow smallBtn">Edit</a>
-                    <a href="" class="btn btn-red smallBtn">Delete</a>
-                </div>
-            </article>
+
+                                </article>
+
+                                <% })%>
+                                    <!-- <article class="dashboardContent card bookedServices">
+                        <h3>Requirement:</h3>
+                        <div class="grid2  bookedServices">
+                            <p><span class="colored">Name:</span> mehak</p>
+                            <p><span class="colored">Email:</span> mehak</p>
+                            <p><span class="colored">Contact Number:</span> mehak</p>
+                            <p><span class="colored">Location Type:</span> mehak</p>
+                            <p><span class="colored">Pin Code:</span> mehak</p>
+                            <p><span class="colored">Starting Time:</span> 8:00 AM Onwards</p>
+                        </div>
+                        <p style="text-align: left;"><span class="colored">Address: </span><br> Lorem ipsum dolor sit
+                            amet.</p>
+                        <p><span class="colored">Details And Requirements: </span>
+                            <br>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                            Nostrum, laudantium assumenda a est officia ab voluptate vitae modi sequi, autem eum aliquid
+                            facere
+                            ratione asperiores obcaecati, laborum illum dolores animi?
+                        </p>
+                        <p
+                            style="text-align: center;padding: 12px;margin-top: 10px; background-color: rgb(231, 231, 231);">
+                            <span class="colored"> Status:</span>
+                            <span class="Ongoing">Ongoing</span>
+                        </p>
+                        <p>Your Request Has Been Accepted By Our Cleaner</p>
+                        <div class="card" style="background-color: rgb(241, 241, 241);">
+                            <h4 class="colored2">Cleaner Details</h4>
+                            <div class="grid2  bookedServices">
+                                <p><span class="colored2">Name:</span> mehak</p>
+                                <p><span class="colored2">Contact Number:</span> mehak</p>
+                            </div>
+                            <p> <span class="colored2">Message From Our Cleaner:</span> <br>Hey this is mehak, Thankyou
+                                for choosing One Step Away Cleaner. <br> I will be at your doorstep by 8:00 AM</p>
+                        </div>
+
+                    </article>
+                    <article class="dashboardContent card bookedServices">
+                        <h3>Requirement: House Cleaning</h3>
+                        <div class="grid2  bookedServices">
+                            <p><span class="colored">Name:</span> mehak</p>
+                            <p><span class="colored">Email:</span> mehak</p>
+                            <p><span class="colored">Contact Number:</span> mehak</p>
+                            <p><span class="colored">Location Type:</span> mehak</p>
+                            <p><span class="colored">Pin Code:</span> mehak</p>
+                            <p><span class="colored">Starting Time:</span> 8:00 AM Onwards</p>
+                        </div>
+                        <p style="text-align: left;"><span class="colored">Address: </span><br> Lorem ipsum dolor sit
+                            amet.</p>
+                        <p><span class="colored">Details And Requirements: </span>
+                            <br>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                            Nostrum, laudantium assumenda a est officia ab voluptate vitae modi sequi, autem eum aliquid
+                            facere
+                            ratione asperiores obcaecati, laborum illum dolores animi?
+                        </p>
+                        <p style="text-align: center;padding: 12px; background-color: rgb(231, 231, 231);"><span
+                                class="colored"> Status:</span>
+                            <span class="Pending">Pending</span>
+                        </p>
+
+                    </article> -->
         </div>
 
         <%- include('./dashboardEnd.ejs') %>
-
-           

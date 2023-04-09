@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bookingSchema = new Schema({
+    userId:{
+        type: Schema.Types.ObjectId,
+        ref: 'User', // GIVING REFERENCE TO USER SCHEMA
+        required: true
+    }
+    ,
     firstName: {
         type: String,
         required: true
@@ -33,10 +39,6 @@ const bookingSchema = new Schema({
         type: String,
         required: true
     },
-    date: {
-        type: String,
-        required: true
-    },
     bookingDate: {
         type: String,
         required: true
@@ -60,6 +62,13 @@ const bookingSchema = new Schema({
         type: String,
         required: true
     },
+    bookingStatus: {
+        type: String,
+        required: true
+    },
+    cleanerDetails:{
+        type:Array
+    }
 })
 
 module.exports = mongoose.model('Booking', bookingSchema);

@@ -5,6 +5,7 @@ router.get('/', (req, res, next) => {
     console.log('Welcome to Home Page')
     res.render('index', {
         pageTitle: 'Cleaning Services',
+        
     })
 })
 

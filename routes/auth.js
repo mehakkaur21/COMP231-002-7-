@@ -12,7 +12,7 @@ router.post('/login',
     authController.postLogin);
 router.post('/logout', authController.postLogout);
 router.get('/signup', authController.getSignup);
-router.post('/signup',[
+router.post('/signup', [
     body('firstName').custom((value) => {
         if (value === '') {
             throw new Error(`Please enter your first name`);

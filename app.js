@@ -43,6 +43,7 @@ app.use(
 app.use((req, res, next) => {
   res.locals.isLoggedIn = req.session.isLoggedIn;
   res.locals.user = req.session.user;
+  console.log(req.session.user);
   next();
 })
 
@@ -53,9 +54,11 @@ app.use(flash());
 const homeRoutes = require('./routes/home');
 const authRoutes = require('./routes/auth');
 const dashboardRoutes = require('./routes/dashboard');
+const bookingRoutes = require('./routes/booking');
 app.use(homeRoutes.router);
 app.use(authRoutes.router);
 app.use(dashboardRoutes.router);
+app.use(bookingRoutes.router);
 
 
 // ADDING ERROR 404 PAGE
