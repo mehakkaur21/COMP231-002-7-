@@ -1,0 +1,201 @@
+<%- include('./dashboardIncludes/dashboardHead.ejs') %>
+    <!-- Sidebar -->
+    <%- include('./dashboardIncludes/sidebarDashboard.ejs') %>
+        <div id="dashboardContainer">
+            <div id="topBar" class="flexRow justifySpaceBetween">
+                <%if(path === '/editBooking'){ %>
+                    <h3><a class="colored" href="/manageService"> My Bookings </a> / Edit Booking</h3>
+                    <%}else{%>
+                        <h3><a class="colored" href="/"> Home </a> / Book Service</h3>
+                        <%}%>
+                            <button class="sidebarDashboardToggle"><i class="fas fa-bars"></i></button>
+            </div>
+
+            <section id="bookingForm" class="dashboardContent card">
+                <%if(path === '/editBooking'){ %>
+                    <h2 style="text-align: left; color: #0097B2;letter-spacing: 2px;">Fill this form to edit your
+                        service details
+                        <%}else{%>
+                            <h2 style="text-align: left; color: #0097B2;letter-spacing: 2px;">Fill this form to book
+                                your service
+                                <%}%>
+                            </h2>
+                            <%if(message){%>
+                                <div class="<%=messageClass%>">
+                                    <p>
+                                        <%= message%>
+                                    </p>
+                                </div>
+                                <%}%>
+                                    <form action="<%= path === '/editBooking' ? '/editBooking' : '/booking' %>"
+                                        method="post" style="padding: 10px;">
+                                        <!-- First Name , Last Name -->
+                                        <div class="flexRow flexRowToColumn alignItemsCenter" style="width:
+                    100%">
+                                            <%if(path === '/editBooking'){ %>
+                                                <div class="flexInputDiv">
+                                                    <label for="FirstName">First Name</label>
+                                                    <input value="<%= firstName %>" type="text" name="firstName"
+                                                        placeholder="John">
+                                                </div>
+                                                <div class="flexInputDiv">
+                                                    <label for="LastName">Last Name</label>
+                                                    <input value="<%= lastName%>" type="text" name="lastName"
+                                                        placeholder="Doe">
+                                                </div>
+                                                <%}else{%>
+                                                    <div class="flexInputDiv">
+                                                        <label for="FirstName">First Name</label>
+                                                        <input value="<%= user.firstName %>" type="text"
+                                                            name="firstName" placeholder="John">
+                                                    </div>
+                                                    <div class="flexInputDiv">
+                                                        <label for="LastName">Last Name</label>
+                                                        <input value="<%= user.lastName%>" type="text" name="lastName"
+                                                            placeholder="Doe">
+                                                    </div>
+                                                    <%}%>
+
+                                        </div>
+
+
+                                        <!-- Email , Contact Number -->
+                                        <div class="flexRow flexRowToColumn alignItemsCenter" style="width:
+                    100%">
+                                            <div class="flexInputDiv">
+                                                <label for="email">Email</label>
+                                                <%if(path === '/editBooking'){ %>
+                                                    <input value="<%= email%>" type="email" name="email"
+                                                        placeholder="john@gmail.com">
+
+                                                    <%}else{%>
+                                                        <input value="<%= user.email%>" type="email" name="email"
+                                                            placeholder="john@gmail.com">
+                                                        <%}%>
+
+
+                                            </div>
+                                            <div class="flexInputDiv">
+                                                <label for="contactNumber">Contact Number</label>
+                                                <input value="<%= contactNumber%>" type="text" name="contactNumber"
+                                                    placeholder="+1 (XXX) XXX-XXXX">
+                                            </div>
+                                        </div>
+
+                                        <!-- Address -->
+                                        <label for="address">Address</label>
+                                        <input value="<%=address%>" type="text" name="address" placeholder="">
+
+                                        <!-- Pin , Location Type -->
+                                        <div class="flexRow flexRowToColumn alignItemsCenter" style="width:
+                                        100%">
+                                            <div class="flexInputDiv">
+                                                <label for="pinCode">Pin Code</label>
+                                                <input value="<%=pinCode%>" type="number" name="pinCode"
+                                                    placeholder="110018">
+                                            </div>
+                                            <div class="flexInputDiv">
+                                                <label for="locationType">Location Type (Home, Office, Studio,
+                                                    Etc)</label>
+                                                <input value="<%=locationType%>" type="text" name="locationType"
+                                                    placeholder="Home">
+                                            </div>
+                                        </div>
+                                        <!-- Date -->
+                                        <label for="date">Date On Which Service Is Required</label>
+                                        <input type="date" value="<%=bookingDate%>" name="bookingDate" id="myDateInput">
+
+                                        <!-- Starting Time And Service Type -->
+                                        <div class="flexRow flexRowToColumn alignItemsCenter" style="width:
+                                        100%">
+                                            <div class="flexInputDiv">
+                                                <p style="text-align: left
+                                    ;"><label for="">Select starting time</label></p>
+                                                <div>
+                                                    <select
+                                                        style="width: 100%; text-align: center; padding: 20px; font-size: 18px; margin-bottom: 10px;"
+                                                        name="startingTime" value="<%= startingTime %>">
+                                                        <%if(path=== '/editBooking')
+                                                        { %>
+                                                            <option value="<%= startingTime%>">
+                                                                <%= startingTime%>
+                                                            </option>
+                                                            <% }%>
+                                                                <option value="8:00 AM">8:00 AM</option>
+                                                                <option value="9:00 AM">9:00 AM</option>
+                                                                <option value="10:00 AM">10:00 AM</option>
+                                                                <option value="11:00 AM">11:00 AM</option>
+                                                                <option value="12:00 PM">12:00 PM</option>
+                                                                <option value="1:00 PM">1:00 PM</option>
+                                                                <option value="2:00 PM">2:00 PM</option>
+                                                                <option value="3:00 PM">3:00 PM</option>
+                                                                <option value="4:00 PM">4:00 PM</option>
+                                                                <option value="5:00 PM">5:00 PM</option>
+                                                                <option value="6:00 PM">6:00 PM</option>
+                                                                <option value="7:00 PM">7:00 PM</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="flexInputDiv">
+                                                <p style="text-align: left
+                                    ;"><label for="">Select Your Desired Service</label></p>
+                                                <select
+                                                    style="width: 100%; text-align: center; padding: 20px; font-size: 18px; margin-bottom: 10px;"
+                                                    name="desiredService" value="<%= desiredService%>">
+                                                    <%if(path === '/editBooking'){ %>
+                                                        <option value="<%= desiredService%>">
+                                                            <%= desiredService%>
+                                                        </option>
+                                                        <% }%>
+                                                            <option value="House Cleaning">House Cleaning</option>
+                                                            <option value="Office Cleaning">Office Cleaning</option>
+                                                            <option value="Carpet Cleaning">Carpet Cleaning</option>
+                                                            <option value="Window Cleaning">Window Cleaning</option>
+                                                            <option value="Pressure Washing">Pressure Washing</option>
+                                                            <option value="Janitorial Services">Janitorial Services
+                                                            </option>
+                                                            <option value="MoveIn Cleaning">Move-In Cleaning</option>
+                                                            <option value="MoveOut Cleaning">Move-Out Cleaning</option>
+                                                            <option value="Post Construction Cleaning">Post-Construction
+                                                                Cleaning</option>
+                                                            <option value="Deep Cleaning">Deep Cleaning</option>
+                                                            <option value="Upholstery Cleaning">Upholstery Cleaning
+                                                            </option>
+                                                            <option value="Tile And Grout Cleaning">Tile and Grout
+                                                                Cleaning</option>
+                                                            <option value="AirDuct Cleaning">Air Duct Cleaning</option>
+                                                            <option value="Garage Cleaning">Garage Cleaning</option>
+                                                            <option value="CarWash">Car Wash</option>
+                                                            <option value="Gutter Cleaning">Gutter Cleaning</option>
+                                                            <option value="Pool Cleaning">Pool Cleaning</option>
+                                                            <option value="Upholstery Cleaning">Upholstery Cleaning
+                                                            </option>
+                                                            <option value="Driveway Cleaning">Driveway Cleaning</option>
+                                                            <option value="Oven Cleaning">Oven Cleaning</option>
+                                                            <option value="Grill Cleaning">Grill Cleaning</option>
+                                                            <option value="Other">Other</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="flexColumn">
+                                            <label for="">Details and Requirements</label>
+                                            <textarea style="padding: 15px; font-size: 16px;" name="details" id=""
+                                                cols="30" rows="2"><%= details%></textarea>
+                                        </div>
+                                        <%if(path === '/editBooking'){ %>
+                                            <button class="btn btn-red"
+                                                style="border: none; cursor: pointer; margin-top: 10px;">Save
+                                                Changes</button>
+                                                <input style="display: none;" type="text" name="bookingId" value="<%= bookingId%>">
+                                            <% }else{%>
+                                                <button class="btn btn-red"
+                                                    style="border: none; cursor: pointer; margin-top: 10px;">Book
+                                                    Service</button>
+                                                <% }%>
+                                    </form>
+            </section>
+        </div>
+
+        <%- include('./dashboardIncludes/dashboardEnd.ejs') %>

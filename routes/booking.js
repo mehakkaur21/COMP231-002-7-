@@ -1,8 +1,28 @@
 const express = require("express");
 const router = express.Router();
 const isAuth = require('../middelwear/isAuth');
+const isUser = require('../middelwear/isUser');
 const bookingController = require('../controller/booking');
 const { check, body } = require('express-validator/check');
+router.get('/booking', isAuth, (req, res, next) => {
+    res.render('booking', {
+        pageTitle: 'Book Service',
+        path:'/booking',
+        message: null,
+        contactNumber:'',
+        address:'',
+        pinCode:'',
+        locationType:'',
+        bookingDate:'',
+        startingTime:'',
+        desiredService:'',
+        dateOfBooking:'',
+        timeOfBooking:'',
+        details:'',
+    })
+})
+
+router.get('/manageServices', isAuth, isUser, bookingController.getBookings);
 
 
 // Post New Booking
@@ -142,3 +162,4 @@ router.post('/editBooking', [
 // Delete Booking
 router.post('/deleteBooking',bookingController.deleteBooking);
 exports.router = router;
+

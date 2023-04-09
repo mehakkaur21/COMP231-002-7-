@@ -38,4 +38,32 @@ router.post('/signup', [
 
 ], authController.postSignup);
 
+router.get('/joinus', authController.getJoinUs);
+router.post('/joinus', [
+    body('firstName').custom((value) => {
+        if (value === '') {
+            throw new Error(`Please enter your first name`);
+        }
+        return true;
+    }),
+    body('lastName').custom((value) => {
+        if (value === '') {
+            throw new Error(`Please enter your last name`);
+        }
+        return true;
+    }),
+    body('email').isEmail().withMessage('Please Enter A Valid Email'),
+    body('password', 'Password must contain atleast 6 characters (letters or numbers)').isLength({ min: 6 }).isAlphanumeric(),
+    body('confirmPassword').custom((value, { req }) => {
+        if (value !== req.body.password) {
+            console.log(req.body.password);
+            console.log(value)
+            throw new Error('Passwords Have To Match');
+        }
+        return true;
+    }),
+
+], authController.postJoinUs);
+
+
 exports.router = router;

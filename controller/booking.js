@@ -18,7 +18,7 @@ exports.postBooking = (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return res.render('dashboard', {
+        return res.render('booking', {
             pageTitle: 'Dashboard | One Step Away Cleaner',
             path: "/SignUp",
             message: errors.array()[0].msg,
@@ -94,7 +94,7 @@ exports.getEditBooking = (req, res, next) => {
     const bookingId = req.params.bookingId;
     Booking.findById(bookingId)
         .then(booking => {
-            res.render('dashboard', {
+            res.render('booking', {
                 pageTitle: 'Edit Booking',
                 path: '/editBooking',
                 firstName: booking.firstName,

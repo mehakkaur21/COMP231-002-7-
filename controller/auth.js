@@ -12,7 +12,7 @@ exports.getLogin = (req, res, next) => {
           message = null;
       }
       res.render('auth/login', {
-          pageTitle: 'Login | Survey It',
+          pageTitle: 'Login | One Step Away Cleaner',
           path: "/login",
           message: message,
           messageClass: className,
@@ -31,7 +31,7 @@ exports.postLogin = (req, res, next) => {
                 req.flash('error', 'Incorrect Email');
                 req.flash('className', 'errorFlash');
                 return res.render('auth/login', {
-                    pageTitle: 'Login | Survey It',
+                    pageTitle: 'Login | One Step Away Cleaner',
                     path: "/login",
                     message: 'Incorrect Email',
                     messageClass: 'errorFlash',
@@ -60,7 +60,7 @@ exports.postLogin = (req, res, next) => {
                     req.session.user = user;
                     console.log('Req.session.user ' + req.session.user);
                     req.session.save();
-                    res.redirect('/dashboard');
+                    res.redirect('/booking');
                     console.log('Logged in');
                 })
             })
@@ -157,7 +157,99 @@ exports.postSignup = (req, res, next) => {
                     user.save();
                     console.log('Account Created');
                     return res.render('auth/login', {
-                        pageTitle: 'Login | Survey It',
+                        pageTitle: 'Login | One Step Away Cleaner',
+                        path: "/login",
+                        message: 'New Account created successfully',
+                        messageClass: 'successFlash',
+                        email: '',
+                        password: ''
+                    });
+                })
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
+exports.getJoinUs = (req, res, next) => {
+    res.render('auth/join', {
+        pageTitle: 'Join Us | One Step Away Cleaner',
+        path: "/Join Us",
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        message: null
+    })
+}
+exports.postJoinUs=(req,res,next)=>{
+    const email = req.body.email;
+    const password = req.body.password;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const confirmPassword = req.body.confirmPassword;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.render('auth/join', {
+            pageTitle: 'Join Us | One Step Away Cleaner',
+            path: "/joinus",
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
+            message: errors.array()[0].msg
+        });
+    }
+
+    User.findOne({ email: email })
+        .then(userCheck => {
+            if (userCheck) {
+                console.log('email exists');
+
+                return res.render('auth/join', {
+                    pageTitle: 'Join Us | One Step Away Cleaner',
+                    path: "/joinus",
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    password: password,
+                    confirmPassword: confirmPassword,
+                    message: 'Account with this email already exists',
+                    messageClass:'errorFLash'
+                });
+            }
+            bcrypt.hash(password, 12)
+                .then(hashedPassword => {
+
+                    // Date and time 
+                    const date2 = new Date();
+                    var dateNow = `${date2.getDate()} ${date2.toLocaleString('default', { month: 'short' })} ${date2.getFullYear()}`;
+                    var date = new Date();
+                    var hours = date.getHours();
+                    var minutes = date.getMinutes();
+                    var ampm = hours >= 12 ? 'pm' : 'am';
+                    hours = hours % 12;
+                    hours = hours ? hours : 12; // the hour '0' should be '12'
+                    minutes = minutes < 10 ? '0' + minutes : minutes;
+                    var strTime = hours + ':' + minutes + ' ' + ampm;
+                    var time = strTime;
+                    console.log(time, dateNow);
+
+                    const user = new User({
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        password: hashedPassword,
+                        userType: 'cleaner',
+                        dateCreated: dateNow,
+                        timeCreated: time
+                    })
+                    user.save();
+                    console.log('Account Created');
+                    return res.render('auth/login', {
+                        pageTitle: 'Login | One Step Away Cleaner',
                         path: "/login",
                         message: 'New Account created successfully',
                         messageClass: 'successFlash',
