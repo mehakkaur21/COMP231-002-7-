@@ -1,0 +1,52 @@
+<%- include('./dashboardHead.ejs') %>
+    <!-- Sidebar -->
+    <%- include('./sidebarDashboard.ejs') %>
+        <div id="dashboardContainer">
+            <div id="topBar" class="flexRow justifySpaceBetween">
+                <h3><a class="colored" href="/users"> Users </a> / <%= user.firstName%>
+                        <%= user.lastName%>
+                </h3>
+                <button class="sidebarDashboardToggle"><i class="fas fa-bars"></i></button>
+            </div>
+
+            <!-- Users Table -->
+
+            <!-- Users Details -->
+            <article class="responses-container margin20">
+                <div class="responses-header">
+                    <h2 style="color: #333;">User Details
+                    </h2 style="color: #333;">
+                </div>
+                <div class="flex-user-data">
+                    <div class="userImage">
+                        <img style="object-fit: cover;"
+                            src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=626&ext=jpg&uid=R43845456&ga=GA1.2.129187666.1679697716&semt=sph"
+                            alt="">
+                    </div>
+                    <div class="gird-user-data">
+                        <div style="padding:0 10px;">
+                            <label for="">First Name</label>
+                            <input type="text" name="firstName" value="<%=user.firstName%>" readonly>
+                        </div>
+                       
+                        <div style="padding:0 10px;">
+                            <label for="">Last Name</label>
+                            <input type="text" name="lastName" value="<%=user.lastName%>" readonly>
+                        </div>
+                       
+                        <div style="padding:0 10px;">
+                            <label for="">Email</label>
+                            <input type="text" name="email" value="<%=user.email%>" readonly>
+                        </div>
+                        <div style="padding:0 10px;">
+                            <label for="">Account Type</label>
+                            <input type="text" style="text-transform: capitalize;"  value="<%=user.userType%>" readonly>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+
+        </div>
+
+        <%- include('./dashboardEnd.ejs') %>

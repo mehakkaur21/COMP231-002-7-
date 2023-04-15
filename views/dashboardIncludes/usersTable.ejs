@@ -1,0 +1,54 @@
+<article class="responses-container" style="margin: 0 20px;padding-top: 5px;">
+
+    <div>
+        <div class="responses-table">
+            <table>
+                <tr>
+                    <th>Sno</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>SignUp Date</th>
+                    <th>SignUp Time</th>
+                    <th>Actions</th>
+                    <%users.reverse().forEach((user,index)=>{%>
+                <tr>
+                    <td style="width:80px;text-align:center">
+                        <%= index+1%>
+                    </td>
+                    <td style=" min-width: 180px;">
+                        <%=user.firstName%>
+                            <%=user.lastName%>
+                    </td>
+                    <td>
+                        <%=user.email%>
+                    </td>
+                    <td>
+                        <%=user.dateCreated%>
+                    </td>
+                    <td>
+                        <%=user.timeCreated%>
+                    </td>
+
+                    <td style="display: flex;gap:6px; padding:8px;justify-content: center;">
+                        <% if(user.userType!=='admin' ){%>
+                            <a class="icon-button btn btn-blue smallBtn" href="/userDetails/<%= user._id%>"> <i
+                                    class="fa-regular fa-eye"></i> &nbsp;
+                                Details</a>
+                            <form action="/deleteUser/<%=user._id%>" method="post">
+                                <button type="submit" class="btn btn-red smallBtn btnButton icon-button"> <i
+                                        class="fa-solid fa-trash"></i></i> &nbsp;
+                                    Delete</button>
+                            </form>
+                            <%}else{%>
+                                <a style="padding: 10px 20px;" class="icon-button viewBtn"
+                                    href="/userDetails/<%= user._id%>"><i class="bi bi-eye"></i>
+                                    Details</a>
+                                <%}%>
+                    </td>
+                </tr>
+                <%})%>
+            </table>
+        </div>
+    </div>
+
+</article>

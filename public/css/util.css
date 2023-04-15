@@ -195,6 +195,26 @@ p {
     text-decoration: none;
 }
 
+.btn-blue {
+    background-image: linear-gradient(to right, #103ad3 0%, #4d65f1 51%, #073a8c 100%);
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+}
+
+.btn-blue:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
 .btn-yellow {
     background-image: linear-gradient(to right, #ffb347 0%, #ffcc33 51%, #ffb347 100%);
     padding: 15px 45px;
@@ -230,6 +250,9 @@ footer img {
 .padding20 {
     padding: 20px;
 }
+.margin20 {
+    margin: 20px;
+}
 
 .grid2 {
     display: grid;
@@ -239,6 +262,10 @@ footer img {
 .smallBtn {
     padding: 13px 20px;
     font-size: 16px;
+}
+.btnButton{
+    border: none;
+    cursor: pointer;
 }
 
 @media screen and (max-width:900px) {

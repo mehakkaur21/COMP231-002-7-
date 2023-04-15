@@ -7,7 +7,8 @@
                 <button class="sidebarDashboardToggle"><i class="fas fa-bars"></i></button>
             </div>
             <section class="dashboardContent card">
-                <h1 style="text-align: center;" class="padding20"><span style="color: #0097B2;">Welcome <%= user.firstName%> !!</span> </h1>
+                <h1 style="text-align: center;" class="padding20"><span style="color: #0097B2;">Welcome <%=
+                            user.firstName%> !!</span> </h1>
                 <div class="textAlignCenter">
                     <img style="width: 57%"
                         src="https://img.freepik.com/free-vector/cleaning-service-concept-illustration_114360-9785.jpg?size=626&ext=jpg&uid=R43845456&ga=GA1.1.129187666.1679697716&semt=sph"
@@ -26,7 +27,30 @@
                     <a href="/manageServices" class="btn btn-yellow">Your Bookings</a>
                 </div>
             </section>
-
-        </div>
+          
+                <section class="dashboardContent card">
+                    <h1 style="text-align: center;" class="padding20"><span style="color: #0097B2;">Welcome <%=
+                                user.firstName%> !!</span> </h1>
+                    <div class="textAlignCenter">
+                        <img style="width: 57%"
+                            src="https://img.freepik.com/free-vector/cleaning-service-concept-illustration_114360-9785.jpg?size=626&ext=jpg&uid=R43845456&ga=GA1.1.129187666.1679697716&semt=sph"
+                            alt="">
+                    </div>
+                    <p style="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et soluta reiciendis corrupti
+                        modi
+                        nam nihil
+                        eius, earum, quis similique, perspiciatis maiores! Quos harum voluptatum fugiat ea corporis nam
+                        corrupti deserunt? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias illo
+                        necessitatibus eos amet, quas neque officiis ut, nulla cupiditate, aliquam cum dicta laudantium
+                        non
+                        exercitationem pariatur aliquid nisi suscipit. Provident fuga voluptate odit tempora ut
+                        necessitatibus! Atque ut dolore recusandae magnam delectus mollitia, harum, ea quaerat quos eius
+                        dicta quas! </p>
+                    <div class="flexRow justifyCenter">
+                        <a href="/booking" class="btn btn-blue">View Requests</a>
+                        <a href="/manageServices" class="btn btn-yellow">My Customers</a>
+                    </div>
+                </section>
+    </div>
 
         <%- include('./dashboardIncludes/dashboardEnd.ejs') %>

@@ -55,10 +55,12 @@ const homeRoutes = require('./routes/home');
 const authRoutes = require('./routes/auth');
 const dashboardRoutes = require('./routes/dashboard');
 const bookingRoutes = require('./routes/booking');
+const adminRoutes = require('./routes/admin');
 app.use(homeRoutes.router);
 app.use(authRoutes.router);
 app.use(dashboardRoutes.router);
 app.use(bookingRoutes.router);
+app.use(adminRoutes.router);
 
 
 // ADDING ERROR 404 PAGE

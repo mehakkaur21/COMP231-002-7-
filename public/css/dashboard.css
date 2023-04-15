@@ -153,3 +153,132 @@ margin-bottom: 10px;
 .Ongoing{
     background-color: var(--lblue);
 }
+
+table {
+    background: #f3f3f3;
+    border-radius: 0.25em;
+    border-collapse: collapse;
+}
+.responses-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+}
+th {
+    border-bottom: 1px solid rgb(223, 218, 218);
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 500px;
+    border-right: 1px solid rgb(223, 218, 218);
+    padding: 16px;
+}
+
+th:last-child, td:last-child {
+    border-right: none;
+}
+
+table {
+    min-width: 100%;
+}
+
+td {
+    color: rgb(112, 112, 112);
+    font-weight: 400;
+    padding: 0.65em 1em;
+    border-right: 1px solid rgb(223, 218, 218);
+    font-size: 15px;
+    min-width: 100%;
+    width: fit-content;
+    background-color: white;
+    text-align: center;
+}
+
+td:nth-child(2), td:nth-child(1) {
+    color: #333;
+}
+
+tr {
+    border-bottom: 1px solid rgb(223, 218, 218);
+}
+
+tr:last-child {
+    border-bottom: none;
+}
+
+
+.responses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(197, 197, 197);
+    padding: 0 16px;
+    padding-bottom: 7px;
+    margin-bottom: 7px;
+}
+
+.responses-header h2 {
+    font-size: 20px;
+    margin-right: 3px;
+}
+
+
+.responses-table {
+    margin: 10px auto;
+    overflow: scroll;
+    border: 1px solid rgb(223, 218, 218);
+    box-shadow: rgba(0, 0, 0, 0.343) 0px 2px 4px 0px inset;
+}
+
+.responses-table th {
+    min-width: 100px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+.flex-user-data {
+    display: flex;
+    margin: 20px;
+    align-items: center;
+    gap: 20px;
+}
+
+.userImage {
+    width: 250px !important;
+    height: 250px !important;
+}
+
+.userImage img {
+    width: 100%;
+    height: 100%;
+}
+
+.gird-user-data {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 80%;
+    margin: 20px;
+}
+
+.flex-user-data p {
+    color: var(--color-info-dark);
+    justify-content: space-between;
+}
+
+.flex-user-data p span {
+    color: #333;
+    margin-right: 10px;
+}
+
+@media screen and (max-width:800px) {
+    .flex-user-data {
+        flex-direction: column;
+    }
+
+    .gird-user-data {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+}
