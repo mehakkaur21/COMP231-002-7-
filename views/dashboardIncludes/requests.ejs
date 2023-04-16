@@ -1,0 +1,63 @@
+<%- include('./dashboardHead.ejs') %>
+    <!-- Sidebar -->
+    <%- include('./sidebarDashboard.ejs') %>
+        <div id="dashboardContainer">
+            <div id="topBar" class="flexRow justifySpaceBetween">
+                <h3><a class="colored" href="/"> Home </a> / Requests</h3>
+                <button class="sidebarDashboardToggle"><i class="fas fa-bars"></i></button>
+            </div>
+            <br>
+            <article class="responses-container" style="margin: 0 20px;padding-top: 5px;">
+                <div>
+                    <div class="responses-table">
+                        <table>
+                            <tr>
+                                <th>Sno</th>
+                                <th>Booked By</th>
+                                <th>Status</th>
+                                <th>Requirement</th>
+                                <th>Scheduled Date</th>
+                                <th>Scheduled Time</th>
+                                <th>Location Type</th>
+                                <th>Actions</th>
+                                <%bookings.reverse().forEach((booking,index)=>{%>
+                            <tr>
+                                <td style="width:80px;text-align:center">
+                                    <%= index+1%>
+                                </td>
+                                <td style=" min-width: 140px;">
+                                    <%=booking.firstName%>
+                                        <%=booking.lastName%>
+                                </td>
+                                <td>
+                                   <span class="<%=booking.bookingStatus%>"> <%=booking.bookingStatus%></span>
+                                </td>
+                                <td>
+                                    <%=booking.desiredService%>
+                                </td>
+                                <td>
+                                    <%=booking.bookingDate%>
+                                </td>
+                                <td>
+                                    <%=booking.startingTime%>
+                                </td>
+                                <td>
+                                    <%=booking.locationType%>
+                                </td>
+
+                                <td style="display: flex;gap:6px; padding:8px;justify-content: center; min-width: 160px">
+                                        <a class=" btn btn-blue smallBtn" href="/requestDetails/<%= booking._id%>">
+                                            <i class="fa-regular fa-eye"></i> &nbsp;
+                                            Details</a>
+                                </td>
+                            </tr>
+                            <%})%>
+                        </table>
+                    </div>
+                </div>
+
+            </article>
+        </div>
+
+
+        <%- include('./dashboardEnd.ejs') %>

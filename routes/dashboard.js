@@ -10,11 +10,7 @@ router.get('/dashboard',(req,res,next)=>{
         path:'/dashboard'
     })
 })
-// router.get('/requests',(req,res,next)=>{
-//     res.render('requests',{
-//         pageTitle:'Booking Requests',
-//         path:'/requests'
-//     })
-// })
+router.get('/requests',bookingController.getAllBookings)
+router.get('/requestDetails/:bookingId',bookingController.getBookingsById)
 
 exports.router = router;

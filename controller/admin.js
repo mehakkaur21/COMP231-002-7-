@@ -39,8 +39,8 @@ exports.getUserDetails = (req, res, next) => {
             User.find({ userId: userId })
                 .then(surveys => {
                     return res.render('dashboardIncludes/userDetails', {
-                        pageTitle: 'SurveyIt | Users',
-                        path: '/admin/users',
+                        pageTitle: 'User Detials',
+                        path: '/user',
                         user: userDetail,
                         surveys: []
                     })

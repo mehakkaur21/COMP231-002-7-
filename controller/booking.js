@@ -82,6 +82,21 @@ exports.getBookings = (req, res, next) => {
             console.log("Some Error Occured", err);
         })
 }
+exports.getAllBookings = (req, res, next) => {
+    Booking.find()
+        .then(bookingsData => {
+            res.render('dashboardIncludes/requests', {
+                pageTitle: 'Requests',
+                bookings: bookingsData,
+                path: '/Requests',
+                message: null,
+                messageClass: "",
+            })
+        })
+        .catch(err => {
+            console.log("Some Error Occured", err);
+        })
+}
 
 // 
 exports.getEditBooking = (req, res, next) => {
@@ -93,7 +108,7 @@ exports.getEditBooking = (req, res, next) => {
                 path: '/editBooking',
                 firstName: booking.firstName,
                 lastName: booking.lastName,
-                email:booking.email,
+                email: booking.email,
                 message: booking.details,
                 contactNumber: booking.contactNumber,
                 address: booking.address,
@@ -107,7 +122,7 @@ exports.getEditBooking = (req, res, next) => {
                 details: booking.details,
                 message: null,
                 messageClass: '',
-                bookingId:bookingId
+                bookingId: bookingId
             })
         })
 }
@@ -133,9 +148,9 @@ exports.postEditBooking = (req, res, next) => {
         return res.render('dashboard', {
             pageTitle: 'Edit Booking | One Step Away Cleaner',
             path: "/editBooking",
-            firstName:firstName,
-            lastName:lastName,
-            email:email,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
             message: errors.array()[0].msg,
             messageClass: "errorFlash",
             contactNumber: contactNumber,
@@ -168,43 +183,80 @@ exports.postEditBooking = (req, res, next) => {
 
             booking.save().then(result => {
                 console.log(result);
-            }).then(result=>{
+            }).then(result => {
                 Booking.find({ userId: req.session.user._id })
+                    .then(bookingsData => {
+                        res.render('dashboardIncludes/manageServices', {
+                            pageTitle: 'My Bookings',
+                            bookings: bookingsData.reverse(),
+                            path: '/myBookings',
+                            message: "Booking Details Edited Successfully",
+                            messageClass: "successFlash",
+                        })
+                    })
+                    .catch(err => {
+                        console.log("Some Error Occured", err);
+                    })
+            })
+        })
+}
+
+exports.deleteBooking = (req, res, next) => {
+    const bookingId = req.body.bookingId;
+    console.log(bookingId)
+    Booking.findByIdAndDelete(bookingId)
+        .then(result => {
+            console.log(result);
+            console.log('Booking Deleted');
+            Booking.find({ userId: req.session.user._id })
                 .then(bookingsData => {
                     res.render('dashboardIncludes/manageServices', {
                         pageTitle: 'My Bookings',
                         bookings: bookingsData.reverse(),
                         path: '/myBookings',
-                        message: "Booking Details Edited Successfully",
+                        message: "Booking Canceled Successfully",
                         messageClass: "successFlash",
                     })
                 })
                 .catch(err => {
                     console.log("Some Error Occured", err);
                 })
-            })
         })
 }
-
-exports.deleteBooking=(req,res,next)=>{
-    const bookingId=req.body.bookingId;
-    console.log(bookingId)
-    Booking.findByIdAndDelete(bookingId)
-    .then(result=>{
-        console.log(result);
-        console.log('Booking Deleted');
-        Booking.find({ userId: req.session.user._id })
+exports.getBookingsById = (req, res, next) => {
+    const bookingId = req.params.bookingId;
+    Booking.findById(bookingId)
         .then(bookingsData => {
-            res.render('dashboardIncludes/manageServices', {
-                pageTitle: 'My Bookings',
-                bookings: bookingsData.reverse(),
+            res.render('dashboardIncludes/requestDetails', {
+                pageTitle: 'Booking Details',
+                booking: bookingsData,
                 path: '/myBookings',
-                message: "Booking Canceled Successfully",
-                messageClass: "successFlash",
+                message: null,
+                messageClass: "",
             })
         })
         .catch(err => {
             console.log("Some Error Occured", err);
         })
-    })
+}
+
+exports.acceptBooking = (req, res, next) => {
+    const cleanerFName = req.body.firstName;
+    const cleanerLName = req.body.lastName;
+    const bookingId = req.body.bookingId;
+    const contactNumber = req.body.contactNumber;
+    const cleanersMessage = req.body.cleanersMessage;
+    const cleanerDetails = [{
+        firstName: cleanerFName,
+        lastName: cleanerLName,
+        contactNumber: contactNumber,
+        cleanersMessage: cleanersMessage
+    }]
+    Booking.findById(bookingId)
+        .then(booking => {
+            booking.cleanerDetails = cleanerDetails;
+            booking.bookingStatus = "Ongoing";
+            booking.save();
+            res.redirect('/requests')
+        })
 }

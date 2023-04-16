@@ -161,5 +161,6 @@ router.post('/editBooking', [
 
 // Delete Booking
 router.post('/deleteBooking',bookingController.deleteBooking);
+router.post('/acceptBooking',bookingController.acceptBooking);
 exports.router = router;
 
