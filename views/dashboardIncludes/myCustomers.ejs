@@ -3,13 +3,11 @@
     <%- include('./sidebarDashboard.ejs') %>
         <div id="dashboardContainer">
             <div id="topBar" class="flexRow justifySpaceBetween">
-                <h3><a class="colored" href="/"> Home </a> / Requests</h3>
+                <h3><a class="colored" href="/"> Home </a> / My Customers</h3>
                 <button class="sidebarDashboardToggle"><i class="fas fa-bars"></i></button>
             </div>
             <br>
-           
             <%- include('./requestsTable.ejs') %>
+      
         </div>
-
-
         <%- include('./dashboardEnd.ejs') %>

@@ -12,5 +12,6 @@ router.get('/dashboard',(req,res,next)=>{
 })
 router.get('/requests',bookingController.getAllBookings)
 router.get('/requestDetails/:bookingId',bookingController.getBookingsById)
+router.get('/myCustomers',bookingController.getMyCustomers)
 
 exports.router = router;

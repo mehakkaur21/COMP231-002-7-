@@ -17,6 +17,13 @@ exports.postBooking = (req, res, next) => {
     const bookingStatus = "Pending";
     const errors = validationResult(req);
 
+    // Date and time 
+    const date = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateNow = date.toLocaleDateString('en-US', options);
+    const options2 = { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'America/Toronto' };
+    const time = new Date().toLocaleTimeString('en-US', options2);
+
     if (!errors.isEmpty()) {
         return res.render('booking', {
             pageTitle: 'Dashboard | One Step Away Cleaner',
@@ -35,15 +42,8 @@ exports.postBooking = (req, res, next) => {
             details: details,
         });
     }
-    // Date and time 
-    const date = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const dateNow = date.toLocaleDateString('en-US', options);
-    const options2 = { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'America/Toronto' };
-    const time = new Date().toLocaleTimeString('en-US', options2);
-
+    
     console.log(firstName, lastName, email, contactNumber, address, pinCode, locationType, bookingDate, startingTime, desiredService, dateNow, time, details);
-    res.redirect('/dashboard');
     const booking = new Booking({
         userId: userId,
         firstName: firstName,
@@ -61,7 +61,11 @@ exports.postBooking = (req, res, next) => {
         details: details,
         bookingStatus: bookingStatus
     })
-    booking.save();
+    booking.save().then(result=>{
+    res.redirect('/dashboard');
+
+    });
+
 }
 
 exports.getBookings = (req, res, next) => {
@@ -246,11 +250,13 @@ exports.acceptBooking = (req, res, next) => {
     const bookingId = req.body.bookingId;
     const contactNumber = req.body.contactNumber;
     const cleanersMessage = req.body.cleanersMessage;
+
     const cleanerDetails = [{
         firstName: cleanerFName,
         lastName: cleanerLName,
         contactNumber: contactNumber,
-        cleanersMessage: cleanersMessage
+        cleanersMessage: cleanersMessage,
+        cleanerId: (req.session.user._id).toString()
     }]
     Booking.findById(bookingId)
         .then(booking => {
@@ -259,4 +265,30 @@ exports.acceptBooking = (req, res, next) => {
             booking.save();
             res.redirect('/requests')
         })
+}
+
+exports.getMyCustomers = (req, res, next) => {
+    var myBookings=[]
+    var obj;
+    Booking.find()
+    .then(bookings => {
+        // bookings.forEach(booking=>{
+        //     console.log(booking.cleanerDetails[0].cleanerId,req.session.user._id)
+        // })
+        myBookings=bookings.filter(booking=>{
+            if(booking.cleanerDetails.length){
+                obj= booking.cleanerDetails[0];
+                console.log(obj.cleanerId);
+                 return obj.cleanerId===req.session.user._id.toString();
+            }
+        })
+        console.log("My Bookings", myBookings)
+        res.render('dashboardIncludes/myCustomers', {
+            pageTitle: 'Requests',
+            bookings: myBookings,
+            path: '/Requests',
+            message: null,
+            messageClass: "",
+        });
+    })
 }

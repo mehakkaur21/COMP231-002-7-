@@ -187,6 +187,25 @@ p {
     border-radius: 10px;
     display: block;
 }
+.btn-green {
+    background-image: linear-gradient(to right, #3dd310 0%, #2fa614 51%, #027328 100%);
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+}
+.btn-green:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
 
 .btn-red:hover {
     background-position: right center;

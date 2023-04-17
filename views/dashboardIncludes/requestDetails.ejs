@@ -3,7 +3,7 @@
     <%- include('./sidebarDashboard.ejs') %>
         <div id="dashboardContainer">
             <div id="topBar" class="flexRow justifySpaceBetween">
-                <h3><a class="colored" href="/"> Home </a> / Requests</h3>
+                <h3><a class="colored" href="/requests"> Request </a> / <%= booking.firstName%></h3>
                 <button class="sidebarDashboardToggle"><i class="fas fa-bars"></i></button>
             </div>
             <article class="dashboardContent card bookedServices">
@@ -53,12 +53,30 @@
                     <div class="card" style="background-color: rgb(241, 241, 241);">
                         <h4 class="colored2">Cleaner Details</h4>
                         <div class="grid2  bookedServices">
-                            <p><span class="colored2">Name:</span> <%= booking.cleanerDetails[0].firstName%> <%= booking.cleanerDetails[0].lastName%></p>
-                            <p><span class="colored2">Contact Number:</span><%= booking.cleanerDetails[0].contactNumber%></p>
+                            <p><span class="colored2">Name:</span>
+                                <%= booking.cleanerDetails[0].firstName%>
+                                    <%= booking.cleanerDetails[0].lastName%>
+                            </p>
+                            <p><span class="colored2">Contact Number:</span>
+                                <%= booking.cleanerDetails[0].contactNumber%>
+                            </p>
                         </div>
-                        <p> <span class="colored2">Message From Our Cleaner:</span> <br><%= booking.cleanerDetails[0].
-                            cleanersMessage%></p>
+                        <p> <span class="colored2">Message From Our Cleaner:</span> <br>
+                            <%= booking.cleanerDetails[0]. cleanersMessage%>
+                        </p>
+
                     </div>
+                    <div class="padding20 flexRow justifySpaceBetween">
+                        <form action="/completeRequest" method="post">
+                            <button type="submit" class="btn btnButton btn-green"><i class="fa-solid fa-circle-check"></i> &nbsp;Mark As Completed</button>
+                            <input style="display: none;" name="bookingId" type="text" value="<%= booking._id%>">
+                        </form>
+                        <form action="/deleteBooking" method="post">
+                            <button type="submit" class="btn btnButton btn-red"><i class="fa-solid fa-trash"></i> &nbsp;Delete Request</button>
+                            <input style="display: none;" name="bookingId" type="text" value="<%= booking._id%>">
+                        </form>
+                    </div>
+
                     <%}else if(booking.bookingStatus==='Pending' ){%>
                         <form action="/acceptBooking" method="post">
                             <div class="">
@@ -73,7 +91,8 @@
 
                                 <label for="">Message For Customer</label>
                                 <br>
-                                <textarea  name="cleanersMessage" style="width: 100%;margin-top: 10px; font-size: 16px;padding: 10px;" id="" cols="30"
+                                <textarea name="cleanersMessage"
+                                    style="width: 100%;margin-top: 10px; font-size: 16px;padding: 10px;" id="" cols="30"
                                     rows="5">Hey, <%= user.firstName%> this side from One Step Away Cleaner, I will be there at <%= booking.startingTime %>. For any queries you can call me on my contact number.</textarea>
                                 <button type="submit"
                                     style="border: none; height: 48px; cursor: pointer; font-size: 15px; padding: 14px 16px;"
