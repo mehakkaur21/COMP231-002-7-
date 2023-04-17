@@ -28,7 +28,14 @@ const userSchema = new Schema({
     timeCreated: {
         type: String,
         required: true
+    },
+    contactNumber:{
+        type:String
+    },
+    notifications:{
+        type:Array
     }
 })
+
 
 module.exports = mongoose.model('User', userSchema);

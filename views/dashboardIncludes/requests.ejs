@@ -7,9 +7,13 @@
                 <button class="sidebarDashboardToggle"><i class="fas fa-bars"></i></button>
             </div>
             <br>
-           
-            <%- include('./requestsTable.ejs') %>
+            <% if(!bookings.length){ %>
+                <% if(user.userType==='cleaner' ){ %>
+                    <article class="dashboardContent card bookedServices">
+                        <h2>Hey <%= user.firstName%>, You have not accepted any bookings yet</h2>
+                    </article>
+                    <% } %>
+                        <% } %>
+                            <%- include('./requestsTable.ejs') %>
         </div>
-
-
         <%- include('./dashboardEnd.ejs') %>

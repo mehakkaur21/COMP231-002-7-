@@ -60,7 +60,7 @@ exports.postLogin = (req, res, next) => {
                     req.session.user = user;
                     console.log('Req.session.user ' + req.session.user);
                     req.session.save();
-                    res.redirect('/booking');
+                    res.redirect('/dashboard');
                     console.log('Logged in');
                 })
         })
@@ -146,7 +146,13 @@ exports.postSignup = (req, res, next) => {
                         password: hashedPassword,
                         userType: 'user',
                         dateCreated: dateNow,
-                        timeCreated: time
+                        timeCreated: time,
+                        notifications:[{
+                            notification: `Thankyou for choosing One Step Away Cleaner !`,
+                            notificationTime: time,
+                            notificationDate: dateNow,
+                            notificationClass: "notification"
+                        }]
                     })
                     user.save();
                     console.log('Account Created');
@@ -173,7 +179,8 @@ exports.getJoinUs = (req, res, next) => {
         email: '',
         password: '',
         confirmPassword: '',
-        message: null
+        message: null,
+        contactNumber:''
     })
 }
 exports.postJoinUs = (req, res, next) => {
@@ -181,6 +188,7 @@ exports.postJoinUs = (req, res, next) => {
     const password = req.body.password;
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
+    const contactNumber = req.body.contactNumber;
     const confirmPassword = req.body.confirmPassword;
     const errors = validationResult(req);
 
@@ -193,7 +201,8 @@ exports.postJoinUs = (req, res, next) => {
             email: email,
             password: password,
             confirmPassword: confirmPassword,
-            message: errors.array()[0].msg
+            message: errors.array()[0].msg,
+            contactNumber:contactNumber
         });
     }
 
@@ -233,7 +242,8 @@ exports.postJoinUs = (req, res, next) => {
                         password: hashedPassword,
                         userType: 'cleaner',
                         dateCreated: dateNow,
-                        timeCreated: time
+                        timeCreated: time,
+                        contactNumber:contactNumber
                     })
                     user.save();
                     console.log('Account Created');

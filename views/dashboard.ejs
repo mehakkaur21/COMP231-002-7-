@@ -6,28 +6,21 @@
                 <h3><a class="colored" href="/"> Home </a> / Dashboard</h3>
                 <button class="sidebarDashboardToggle"><i class="fas fa-bars"></i></button>
             </div>
-            <section class="dashboardContent card">
-                <h1 style="text-align: center;" class="padding20"><span style="color: #0097B2;">Welcome <%=
-                            user.firstName%> !!</span> </h1>
-                <div class="textAlignCenter">
-                    <img style="width: 57%"
-                        src="https://img.freepik.com/free-vector/cleaning-service-concept-illustration_114360-9785.jpg?size=626&ext=jpg&uid=R43845456&ga=GA1.1.129187666.1679697716&semt=sph"
-                        alt="">
-                </div>
-                <p style="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et soluta reiciendis corrupti modi
-                    nam nihil
-                    eius, earum, quis similique, perspiciatis maiores! Quos harum voluptatum fugiat ea corporis nam
-                    corrupti deserunt? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias illo
-                    necessitatibus eos amet, quas neque officiis ut, nulla cupiditate, aliquam cum dicta laudantium non
-                    exercitationem pariatur aliquid nisi suscipit. Provident fuga voluptate odit tempora ut
-                    necessitatibus! Atque ut dolore recusandae magnam delectus mollitia, harum, ea quaerat quos eius
-                    dicta quas! </p>
-                <div class="flexRow justifyCenter">
-                    <a href="/booking" class="btn btn-red">Book Service</a>
-                    <a href="/manageServices" class="btn btn-yellow">Your Bookings</a>
-                </div>
+
+            <section id="notifications" class="dashboardContent card">
+                <p style="text-align: left;" class="colored">
+                    <i class="fa-solid fa-bell"></i> &nbsp; Notifications
+                </p>
+
+                <% if(notifications.length){ %>
+                   <% notifications.reverse().slice(0, 4).forEach(notifn=>{ %>
+                    <p style="margin: 0;text-align: left;" class="notification <%= notifn.notificationClass%>"><b> <%= notifn.notification%></b> <br><span style="font-size: 13px;"><%= notifn.notificationDate %>,&nbsp;  <%= notifn.notificationTime %></span>  </p>
+                    <% }) %>
+                    <% } %>
+
+
             </section>
-          
+            <% if(user.userType==='user' ){%>
                 <section class="dashboardContent card">
                     <h1 style="text-align: center;" class="padding20"><span style="color: #0097B2;">Welcome <%=
                                 user.firstName%> !!</span> </h1>
@@ -36,21 +29,94 @@
                             src="https://img.freepik.com/free-vector/cleaning-service-concept-illustration_114360-9785.jpg?size=626&ext=jpg&uid=R43845456&ga=GA1.1.129187666.1679697716&semt=sph"
                             alt="">
                     </div>
-                    <p style="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et soluta reiciendis corrupti
-                        modi
-                        nam nihil
-                        eius, earum, quis similique, perspiciatis maiores! Quos harum voluptatum fugiat ea corporis nam
-                        corrupti deserunt? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias illo
-                        necessitatibus eos amet, quas neque officiis ut, nulla cupiditate, aliquam cum dicta laudantium
-                        non
-                        exercitationem pariatur aliquid nisi suscipit. Provident fuga voluptate odit tempora ut
-                        necessitatibus! Atque ut dolore recusandae magnam delectus mollitia, harum, ea quaerat quos eius
-                        dicta quas! </p>
+                    <p style="">Welcome to One Step Away Cleaner! We're thrilled to have you here. As your go-to
+                        cleaning
+                        service provider, we offer a wide range of cleaning services, including house cleaning, office
+                        cleaning, window cleaning, carpet cleaning, and more. Our team of professional cleaners is
+                        committed
+                        to providing you with a spotless and sparkling clean space, so you can sit back, relax, and
+                        enjoy
+                        your clean and organized surroundings. Thank you for choosing One Step Away Cleaner, and we look
+                        forward to helping you with all your cleaning needs! </p>
                     <div class="flexRow justifyCenter">
-                        <a href="/booking" class="btn btn-blue">View Requests</a>
-                        <a href="/manageServices" class="btn btn-yellow">My Customers</a>
+                        <a href="/booking" class="btn btn-red">Book Service</a>
+                        <a href="/manageServices" class="btn btn-yellow">Your Bookings</a>
                     </div>
                 </section>
-    </div>
+                <% }else if(user.userType==='cleaner' ){%>
+                    <section class="dashboardContent card">
+                        <h1 style="text-align: center;" class="padding20"><span style="color: #0097B2;">Welcome <%=
+                                    user.firstName%> !!</span> </h1>
+                        <div class="textAlignCenter">
+                            <img style="width: 57%"
+                                src="https://img.freepik.com/free-vector/male-female-cleaning-staff-with-mops-vacuum-cleaner_74855-19844.jpg?w=1380&t=st=1680297238~exp=1680297838~hmac=ddfaa2ce9476870c6a67e3aeb5eba312c11dd1e728221cdb52e73586acabe339"
+                                alt="">
+                        </div>
+                        <p>Welcome back, <%= user.firstName %>! You have new cleaning requests to review. Take your time
+                                and choose the ones that fit your schedule best.</p>
+                        <p style="">As a cleaner, you play a crucial role in maintaining cleanliness and hygiene in
+                            various
+                            environments. Your work goes beyond just making things look neat and tidy; you're
+                            responsible for
+                            creating a healthy and safe environment for people to live and work in. Whether you're
+                            cleaning
+                            someone's home or office, you're making a positive impact on their lives by giving them a
+                            clean and
+                            organized space to live or work in.
+                            <br>
+                            You'll be dealing with a wide range of clients, each with
+                            their
+                            specific requirements and preferences, so being able to listen to and communicate with them
+                            effectively is crucial. You'll also need to be physically fit as cleaning can be a demanding
+                            job,
+                            requiring you to be on your feet for long periods, lift heavy objects, and be comfortable
+                            working in
+                            various environments.
+                        </p>
+                        <div class="flexRow justifyCenter">
+                            <a href="/requests" class="btn btn-blue">View Requests</a>
+                            <a href="/myCustomers" class="btn btn-yellow">My Customers</a>
+                        </div>
+                    </section>
+                    <%}%>
+                <% if(user.userType==='admin' ){%>
+                    <section class="dashboardContent card">
+                        <h1 style="text-align: center;" class="padding20"><span style="color: #0097B2;">Welcome <%=
+                                    user.firstName%> !!</span> </h1>
+                        <div class="textAlignCenter">
+                            <img style="width: 57%"
+                                src="https://img.freepik.com/free-vector/male-female-cleaning-staff-with-mops-vacuum-cleaner_74855-19844.jpg?w=1380&t=st=1680297238~exp=1680297838~hmac=ddfaa2ce9476870c6a67e3aeb5eba312c11dd1e728221cdb52e73586acabe339"
+                                alt="">
+                        </div>
+                        <p>Welcome back, <%= user.firstName %>! You have new cleaning requests to review. Take your time
+                                and choose the ones that fit your schedule best.</p>
+                        <p style="">As a cleaner, you play a crucial role in maintaining cleanliness and hygiene in
+                            various
+                            environments. Your work goes beyond just making things look neat and tidy; you're
+                            responsible for
+                            creating a healthy and safe environment for people to live and work in. Whether you're
+                            cleaning
+                            someone's home or office, you're making a positive impact on their lives by giving them a
+                            clean and
+                            organized space to live or work in.
+                            <br>
+                            You'll be dealing with a wide range of clients, each with
+                            their
+                            specific requirements and preferences, so being able to listen to and communicate with them
+                            effectively is crucial. You'll also need to be physically fit as cleaning can be a demanding
+                            job,
+                            requiring you to be on your feet for long periods, lift heavy objects, and be comfortable
+                            working in
+                            various environments.
+                        </p>
+                        <div class="flexRow justifyCenter">
+                            <a href="/requests" class="btn btn-blue">View Requests</a>
+                            <a href="/myCustomers" class="btn btn-red">My Customers</a>
+                            <a href="/users" class="btn btn-yellow">Users</a>
+                            <a href="/cleaners" class="btn btn-green">Cleaners</a>
+                        </div>
+                    </section>
+                    <%}%>
+        </div>
 
         <%- include('./dashboardIncludes/dashboardEnd.ejs') %>

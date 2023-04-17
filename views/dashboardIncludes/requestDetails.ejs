@@ -80,14 +80,13 @@
                     <%}else if(booking.bookingStatus==='Pending' ){%>
                         <form action="/acceptBooking" method="post">
                             <div class="">
-
                                 <input style="display: none;" name="bookingId" type="text" value="<%= booking._id%>">
                                 <input style="display: none;" name="firstName" type="text"
-                                    value="<%= booking.firstName %>">
+                                    value="<%= user.firstName %>">
                                 <input style="display: none;" name="lastName" type="text"
-                                    value="<%= booking.lastName %>">
+                                    value="<%= user.lastName %>">
                                 <input style="display: none;" name="contactNumber" type="text"
-                                    value="<%= booking.contactNumber %>">
+                                    value="<%= user.contactNumber %>">
 
                                 <label for="">Message For Customer</label>
                                 <br>
@@ -100,7 +99,17 @@
                                     Booking</button>
                             </div>
                         </form>
-                        <%}%>
+                        <%}else if(booking.bookingStatus==='Completed'){%>
+                            <p>Cleaning service has been completed, Thankyou for choosing One Step Away Cleaner</p>
+                            <form action="/deleteBooking" method="post">
+                                <div class="flexRow">
+                                    <button type="submit"
+                                        style="border: none; height: 48px; cursor: pointer; font-size: 15px; padding: 14px 16px;"
+                                        class="btn btn-red">Delete Booking</button>
+                                    <input style="display: none;" name="bookingId" type="text" value="<%= booking._id%>">
+                                </div>
+                            </form>
+                            <%}%>
 
 
             </article>

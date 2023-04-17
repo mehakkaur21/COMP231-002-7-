@@ -28,25 +28,43 @@
                             <label for="">First Name</label>
                             <input type="text" name="firstName" value="<%=user.firstName%>" readonly>
                         </div>
-                       
+
                         <div style="padding:0 10px;">
                             <label for="">Last Name</label>
                             <input type="text" name="lastName" value="<%=user.lastName%>" readonly>
                         </div>
-                       
+
                         <div style="padding:0 10px;">
                             <label for="">Email</label>
                             <input type="text" name="email" value="<%=user.email%>" readonly>
                         </div>
-                        <div style="padding:0 10px;">
-                            <label for="">Account Type</label>
-                            <input type="text" style="text-transform: capitalize;"  value="<%=user.userType%>" readonly>
-                        </div>
+                        <%if(user.userType==='cleaner'){%>
+                            <div style="padding:0 10px;">
+                                <label for="">Contact Number</label>
+                                <input type="text" name="email" value="<%=user.contactNumber%>" readonly>
+                            </div>
+                            <%}%>
+                                <div style="padding:0 10px;">
+                                    <label for="">Account Type</label>
+                                    <input type="text" style="text-transform: capitalize;" value="<%=user.userType%>"
+                                        readonly>
+                                </div>
                     </div>
                 </div>
 
             </article>
-
+            <% if(!bookings.length){ %>
+                <% if(user.userType==='cleaner' ){ %>
+                    <article class="dashboardContent card bookedServices">
+                        <h2> <%= user.firstName%> has not accepted any bookings yet</h2>
+                    </article>
+                    <% }else{ %>
+                        <article class="dashboardContent card bookedServices">
+                            <h2><%= user.firstName%> has not made any bookings yet</h2>
+                        </article>
+                        <% } %>
+                            <% } %>
+            <%- include('./bookingDetailsCard.ejs') %>
         </div>
 
         <%- include('./dashboardEnd.ejs') %>

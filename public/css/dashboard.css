@@ -1,3 +1,4 @@
+
 /* #mainArea{
     background-color: aqua;
     height: 300px;
@@ -145,13 +146,17 @@ padding: 20px;
 letter-spacing: 1px;
 margin-bottom: 10px;
 }
-.Pending,.Ongoing{
+.Pending,.Ongoing,.Completed{
     background-color: red;
     color: white;
-    padding: 5px 8px;
+    padding: 7px 11px;
+    border-radius: 10px;
 }
 .Ongoing{
-    background-color: var(--lblue);
+    background-color: blue;
+}
+.Completed{
+    background-color: rgb(1, 193, 17);
 }
 
 table {
@@ -281,4 +286,23 @@ tr:last-child {
         grid-template-columns: repeat(1, 1fr);
     }
 
+}
+
+.notification{
+    background-color: rgb(238, 238, 238);
+    padding: 10px;
+    border-bottom: 1px solid #bababa;
+}
+
+.notificationRed{
+    background-color: rgb(249, 208, 208);
+}
+.notificationYellow{
+    background-color: rgb(249, 245, 208);
+}
+.notificationGreen{
+    background-color: rgb(219, 249, 208);
+}
+.notificationdGreen{
+    background-color: rgb(156, 250, 122);
 }

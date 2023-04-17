@@ -3,14 +3,24 @@
     <%- include('./sidebarDashboard.ejs') %>
         <div id="dashboardContainer">
             <div id="topBar" class="flexRow justifySpaceBetween">
-                <h3><a class="colored" href="/"> Home </a> / <%= dataType%></h3>
+                <h3><a class="colored" href="/"> Home </a> / <%= dataType%>
+                </h3>
                 <button class="sidebarDashboardToggle"><i class="fas fa-bars"></i></button>
             </div>
-            <div class="responses-header padding20 margin20"  >
-                <h1 class="colored2"><%= dataType%></h1>
+            <div class="responses-header padding20 margin20">
+                <h1 class="colored2">
+                    <%= dataType%>
+                </h1>
             </div>
-            <!-- Users Table -->
-            <%- include('./usersTable.ejs') %>
+            <%if(message){%>
+                <div class="<%=messageClass%> dashboardContent">
+                    <p>
+                        <%= message%>
+                    </p>
+                </div>
+                <%}%>
+                    <!-- Users Table -->
+                    <%- include('./usersTable.ejs') %>
 
         </div>
 

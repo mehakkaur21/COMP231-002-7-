@@ -1,3 +1,4 @@
+const User = require('../model/users');
 const Booking = require('../model/bookings');
 const { validationResult } = require('express-validator/check');
 
@@ -42,7 +43,7 @@ exports.postBooking = (req, res, next) => {
             details: details,
         });
     }
-    
+
     console.log(firstName, lastName, email, contactNumber, address, pinCode, locationType, bookingDate, startingTime, desiredService, dateNow, time, details);
     const booking = new Booking({
         userId: userId,
@@ -61,10 +62,22 @@ exports.postBooking = (req, res, next) => {
         details: details,
         bookingStatus: bookingStatus
     })
-    booking.save().then(result=>{
-    res.redirect('/dashboard');
+    booking.save().then(result => {
+        console.log(result);
+        User.findById(userId).then(user => {
+            user.notifications.push({
+                notification: `Your booking request for ${desiredService} has been generated, Booking ID: ${result._id}. Our cleaners will accept your request soon`,
+                notificationTime: time,
+                notificationDate: dateNow,
+                notificationClass: "notificationGreen"
+            })
+            user.save();
+        })
+        res.redirect('/dashboard');
 
     });
+
+
 
 }
 
@@ -198,6 +211,24 @@ exports.postEditBooking = (req, res, next) => {
                             messageClass: "successFlash",
                         })
                     })
+                    .then(result => {
+                        const date = new Date();
+                        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                        const dateNow = date.toLocaleDateString('en-US', options);
+                        const options2 = { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'America/Toronto' };
+                        const time = new Date().toLocaleTimeString('en-US', options2);
+
+                        User.findById(userId).then(user => {
+                            user.notifications.push({
+                                notification: `Your booking request for ${desiredService} has been edited. Booking Id: ${bookingId} Our cleaners will accept your request soon`,
+                                notificationTime: time,
+                                notificationDate: dateNow,
+                                notificationClass: "notificationYellow"
+                            })
+                            user.save();
+                        })
+                        res.redirect('/dashboard');
+                    })
                     .catch(err => {
                         console.log("Some Error Occured", err);
                     })
@@ -206,27 +237,60 @@ exports.postEditBooking = (req, res, next) => {
 }
 
 exports.deleteBooking = (req, res, next) => {
+    const date = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateNow = date.toLocaleDateString('en-US', options);
+    const options2 = { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'America/Toronto' };
+    const time = new Date().toLocaleTimeString('en-US', options2);
     const bookingId = req.body.bookingId;
-    console.log(bookingId)
-    Booking.findByIdAndDelete(bookingId)
-        .then(result => {
-            console.log(result);
-            console.log('Booking Deleted');
-            Booking.find({ userId: req.session.user._id })
-                .then(bookingsData => {
-                    res.render('dashboardIncludes/manageServices', {
-                        pageTitle: 'My Bookings',
-                        bookings: bookingsData.reverse(),
-                        path: '/myBookings',
-                        message: "Booking Canceled Successfully",
-                        messageClass: "successFlash",
-                    })
-                })
-                .catch(err => {
-                    console.log("Some Error Occured", err);
-                })
+    console.log(bookingId);
+    var userId = '';
+    var desiredService = '';
+    var message=''
+   Booking.findById(bookingId).then(booking=>{
+   if(req.session.user.userType==='user'){
+    message =`Booking for ${booking.desiredService} with Booking ID: ${bookingId} has been canceled by you`
+   }
+   if(req.session.user.userType==='cleaner'){
+    message =`${booking.firstName} ${booking.lastName}'s Booking for ${booking.desiredService} with Booking ID: ${bookingId} has been canceled by you`
+    User.findById(booking.userId)
+    .then(user=>{
+        user.notifications.push({
+            notification: `Your Booking for ${booking.desiredService} with Booking ID: ${bookingId} has been canceled by our cleaner ${booking.cleanerDetails[0].firstName} ${booking.cleanerDetails[0].lastName}`,
+            notificationTime: time,
+            notificationDate: dateNow,
+            notificationClass: "notificationRed"
         })
-}
+        user.save();
+    })    
+   }
+   })
+   .then(result=>{
+    Booking.findByIdAndDelete(bookingId)
+    .then(result => {
+        console.log(result);
+        console.log('Booking Deleted');
+    })
+    .then(result => {
+        User.findById(req.session.user._id)
+        .then(user => {
+            user.notifications.push({
+                notification: message,
+                notificationTime: time,
+                notificationDate: dateNow,
+                notificationClass: "notificationRed"
+            })
+            user.save();
+        })
+
+        return res.redirect('/dashboard');
+    })
+   })
+ 
+        .catch(err => {
+            console.log("Some Error Occured", err);
+        })
+    }
 exports.getBookingsById = (req, res, next) => {
     const bookingId = req.params.bookingId;
     Booking.findById(bookingId)
@@ -250,7 +314,11 @@ exports.acceptBooking = (req, res, next) => {
     const bookingId = req.body.bookingId;
     const contactNumber = req.body.contactNumber;
     const cleanersMessage = req.body.cleanersMessage;
-
+    const date = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateNow = date.toLocaleDateString('en-US', options);
+    const options2 = { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'America/Toronto' };
+    const time = new Date().toLocaleTimeString('en-US', options2);
     const cleanerDetails = [{
         firstName: cleanerFName,
         lastName: cleanerLName,
@@ -262,33 +330,94 @@ exports.acceptBooking = (req, res, next) => {
         .then(booking => {
             booking.cleanerDetails = cleanerDetails;
             booking.bookingStatus = "Ongoing";
-            booking.save();
-            res.redirect('/requests')
+            booking.save().then(result => {
+
+
+                User.findById(req.session.user._id).then(user => {
+                    user.notifications.push({
+                        notification: `You have accepted ${result.firstName}'s booking request with Booking Id: ${bookingId}`,
+                        notificationTime: time,
+                        notificationDate: dateNow,
+                        notificationClass: "notificationYellow"
+                    })
+                    user.save();
+                })
+                User.findById(result.userId)
+                    .then(user => {
+                        user.notifications.push({
+                            notification: `Your Booking request with Booking Id: ${bookingId} has been accepted by our cleaner ${req.session.user.firstName} ${req.session.user.lastName}`,
+                            notificationTime: time,
+                            notificationDate: dateNow,
+                            notificationClass: "notificationGreen"
+                        })
+                        user.save();
+                    })
+                res.redirect('/dashboard');
+            });
+
         })
 }
 
 exports.getMyCustomers = (req, res, next) => {
-    var myBookings=[]
+    var myBookings = []
     var obj;
     Booking.find()
-    .then(bookings => {
-        // bookings.forEach(booking=>{
-        //     console.log(booking.cleanerDetails[0].cleanerId,req.session.user._id)
-        // })
-        myBookings=bookings.filter(booking=>{
-            if(booking.cleanerDetails.length){
-                obj= booking.cleanerDetails[0];
-                console.log(obj.cleanerId);
-                 return obj.cleanerId===req.session.user._id.toString();
-            }
+        .then(bookings => {
+            // bookings.forEach(booking=>{
+            //     console.log(booking.cleanerDetails[0].cleanerId,req.session.user._id)
+            // })
+            myBookings = bookings.filter(booking => {
+                if (booking.cleanerDetails.length) {
+                    obj = booking.cleanerDetails[0];
+                    console.log(obj.cleanerId);
+                    return obj.cleanerId === req.session.user._id.toString();
+                }
+            })
+            console.log("My Bookings", myBookings)
+            res.render('dashboardIncludes/myCustomers', {
+                pageTitle: 'Requests',
+                bookings: myBookings,
+                path: '/myCustomers',
+                message: null,
+                messageClass: "",
+            });
         })
-        console.log("My Bookings", myBookings)
-        res.render('dashboardIncludes/myCustomers', {
-            pageTitle: 'Requests',
-            bookings: myBookings,
-            path: '/Requests',
-            message: null,
-            messageClass: "",
-        });
-    })
+}
+exports.bookingCompleted = (req, res, next) => {
+    const bookingId = req.body.bookingId;
+    const date = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateNow = date.toLocaleDateString('en-US', options);
+    const options2 = { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'America/Toronto' };
+    const time = new Date().toLocaleTimeString('en-US', options2);
+
+    Booking.findById(bookingId)
+        .then(booking => {
+            booking.bookingStatus = 'Completed';
+            booking.save();
+            User.findById(booking.userId)
+            .then(user => {
+                user.notifications.push({
+                    notification: `Your Booking request with Booking Id: ${bookingId} has been completed by our cleaner ${req.session.user.firstName} ${req.session.user.lastName}`,
+                    notificationTime: time,
+                    notificationDate: dateNow,
+                    notificationClass: "notificationdGreen"
+                })
+                user.save();
+            })
+            
+            User.findById(req.session.user._id)
+            .then(user => {
+                user.notifications.push({
+                    notification: `Congratulations, You have completed the booking request with Booking Id: ${bookingId}`,
+                    notificationTime: time,
+                    notificationDate: dateNow,
+                    notificationClass: "notificationdGreen"
+                })
+                user.save();
+            })
+            
+            res.redirect('/dashboard');
+        })
+
 }

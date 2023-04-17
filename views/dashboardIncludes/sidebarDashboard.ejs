@@ -1,4 +1,4 @@
-<aside id="sidebarDashboard" >
+<aside id="sidebarDashboard">
     <div style="position:absolute; right: 30px; top: 30px;">
         <button class="sidebarDashboardClose"><i class="fa-solid fa-arrow-left"></i></button>
     </div>
@@ -11,12 +11,19 @@
         <ul>
             <li>
                 <a href="/dashboard"><i class="fa-solid fa-grip"></i></i> &nbsp; Dashboard</a>
-                <a href="/booking"><i class="fa-solid fa-plus"></i> &nbsp; Book Service</a>
-                <a href="/manageServices"><i class="fa-solid fa-cubes"></i> &nbsp; My Bookings</a>
-                <a href="/requests"><i class="fa-solid fa-user-plus"></i> &nbsp; Requests</a>
-                <a href="/myCustomers"><i class="fa-solid fa-circle-check"></i> &nbsp; My Customers</a>
-                <a href="/users"><i class="fa-solid fa-users"></i> &nbsp; Users</a>
-                <a href="/cleaners"><i class="fa-solid fa-user-tie"></i> &nbsp; Cleaners</a>
+                <%if(user.userType==='user'){%>
+                    <a href="/booking"><i class="fa-solid fa-plus"></i> &nbsp; Book Service</a>
+                    <a href="/manageServices"><i class="fa-solid fa-cubes"></i> &nbsp; My Bookings</a>
+                    <%}%>
+                        <%if(user.userType==='cleaner' || user.userType==='admin'){%>
+                            <a href="/requests"><i class="fa-solid fa-user-plus"></i> &nbsp; Requests</a>
+                            <a href="/myCustomers"><i class="fa-solid fa-circle-check"></i> &nbsp; My Customers</a>
+                            <%}%>
+                                <%if(user.userType==='admin'){%>
+                                    <a href="/users"><i class="fa-solid fa-users"></i> &nbsp; Users</a>
+                                    <a href="/cleaners"><i class="fa-solid fa-user-tie"></i> &nbsp; Cleaners</a>
+                                    <%}%>
+
             </li>
         </ul>
     </div>

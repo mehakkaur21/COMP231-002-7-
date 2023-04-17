@@ -53,6 +53,12 @@ router.post('/joinus', [
         return true;
     }),
     body('email').isEmail().withMessage('Please Enter A Valid Email'),
+    body('contactNumber').custom((value) => {
+        if (value === '') {
+            throw new Error(`Please enter your contact number`);
+        }
+        return true;
+    }),
     body('password', 'Password must contain atleast 6 characters (letters or numbers)').isLength({ min: 6 }).isAlphanumeric(),
     body('confirmPassword').custom((value, { req }) => {
         if (value !== req.body.password) {

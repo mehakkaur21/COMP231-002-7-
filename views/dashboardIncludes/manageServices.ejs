@@ -13,6 +13,13 @@
                     </p>
                 </div>
                 <%}%>
+                <% if(!bookings.length){ %>
+                    <% if(user.userType==='user' ){ %>
+                            <article class="dashboardContent card bookedServices">
+                                <h2>Hey <%= user.firstName%>, You have not made any bookings yet</h2>
+                            </article>
+                            <% } %>
+                                <% } %>
                 <%- include('./bookingDetailsCard.ejs') %>
  
                                     <!-- <article class="dashboardContent card bookedServices">
