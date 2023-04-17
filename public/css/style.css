@@ -195,7 +195,7 @@ header {
 }
 
 #benefits {
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(255, 255, 255);
     padding: 20px 10px;
 }
 
@@ -654,6 +654,16 @@ a {
     gap: 10px;
     max-width: 1300px;
     margin: auto;
+}
+#about{
+    background-color: rgb(245, 245, 245);
+}
+#about>div{
+    width: 50%;
+    padding: 10px;
+}
+#about>div img{
+    width: 60%;
 }
 
 @media screen and (max-width:800px) {

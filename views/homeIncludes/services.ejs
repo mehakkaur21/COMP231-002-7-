@@ -2,8 +2,7 @@
     <section id="services" class="padding20">
         <div id="sectionHeader">
             <h1 class="greenGradientText">Services We Provide</h1>
-            <p>Lorem ipsum doorum minima nobis ad. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nihil,
-                vitae.</p>
+            <p>Discover our range of professional cleaning services designed to leave your space spotless and refreshed</p>
         </div>
         <br>
         <div class="services">
@@ -68,6 +67,10 @@
             </article>
         </div>
         <div class="textAlignCenter padding20">
-            <a style="display: inline-block;" href="" class="btn btn-yellow">Book Service Now !</a>
+            <% if(isLoggedIn){%>
+                <a style="display: inline-block;" href="/booking" class="btn btn-yellow">Book Service Now !</a>
+                    <% }else{%>
+                        <a style="display: inline-block;" href="/login" class="btn btn-yellow">Book Service Now !</a>
+                        <%}%>
         </div>
     </section>

@@ -4,30 +4,33 @@
         <div>
             <h3>About</h3>
             <img style="margin: 0;" src="./img/logo.png" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga libero ipsum natus rem
-                perferendis
-                placeat voluptas pariatur laudantium vero culpa. Magni, aliquid esse! Est iure atque
-                recusandae,
-                praesentium provident non.</p>
-            <a href="">Book Now</a>
+            <p>One Step Away Cleaner is a professional cleaning service that provides top-quality cleaning solutions for
+                homes and businesses. With a team of experienced and skilled cleaners, we strive to ensure that your
+                space is clean, organized, and always looking its best.
+            </p>
+            <% if(isLoggedIn){%>
+                <a href="/booking">Book Now</a>
+                <% }else{%>
+                <a href="/login">Book Now</a>
+                    <%}%>
         </div>
         <div>
             <h3>Navigate To</h3>
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">About Us</a></li>
-                <li><a href="">Services</a></li>
-                <li><a href="">Contact Us</a></li>
-                <li><a href="">How it works ?</a></li>
-                <li><a href="">Testimonials</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="/joinus">Join Us</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/signup">SignUp</a></li>
+
             </ul>
             <br>
             <div class="flexRow socialIcons">
 
                 <a href="#"><i style="color: #fa93ff;" class="fa-brands fa-instagram"></i></i></a>
                 <a href="#"><i style="color: #4980ff" class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i style="color: rgb(19, 255, 19);"
-                        class="fa-brands fa-whatsapp"></i></i></a>
+                <a href="#"><i style="color: rgb(19, 255, 19);" class="fa-brands fa-whatsapp"></i></i></a>
 
             </div>
         </div>

@@ -1,12 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= pageTitle %></title>
-</head>
-<body>
-    Page not found
-</body>
-</html>
+<!-- Head -->
+<%- include('./homeIncludes/homeHead.ejs') %>
+    <!-- Navbar -->
+    <%- include('./homeIncludes/navbar.ejs') %>
+
+
+        <header id="homeHeader">
+            <div class="mobileNavbar flexRow alignItemsCenter" style="padding: 8px;">
+                <img class="logo" src="./img/logo.png" alt="">
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <section id="homePageHeader">
+                <div style="width: 100%; text-align: center;" class="headerContent">
+                    <h1 class="greenGradientText">Error 404</h1>
+                    <p>
+                        Page Not Found
+                    </p>
+                </div>
+                
+            </section>
+        </header>
+
+        <!-- Footer -->
+        <%- include('./homeIncludes/footer.ejs') %>
+            <%- include('./homeIncludes/homeEnd.ejs') %>

@@ -13,7 +13,12 @@
                 One Step Away Cleaner is your one-stop destination for expert cleaning services. Get dozens of trusted
                 professionals near you to take care of your home and offices.
             </p>
-            <a class="btn btn-red" href="#">Book Service Now</a>
+             <% if(isLoggedIn){%>
+            <a class="btn btn-red" href="/booking">Book Service Now</a>
+                <% }else{%>
+            <a class="btn btn-red" href="/login">Book Service Now</a>
+
+                    <%}%>
         </div>
         <div class="headerImage">
             <img src="./img/headerImg.png" alt="">
