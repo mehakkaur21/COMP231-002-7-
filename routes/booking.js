@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const isAuth = require('../middelwear/isAuth');
 const isUser = require('../middelwear/isUser');
+const isCleaner = require('../middelwear/isCleaner');
 const bookingController = require('../controller/booking');
 const { check, body } = require('express-validator/check');
-router.get('/booking', isAuth, (req, res, next) => {
+router.get('/booking', isAuth,isUser, (req, res, next) => {
     res.render('booking', {
         pageTitle: 'Book Service',
         path:'/booking',
@@ -26,7 +27,7 @@ router.get('/manageServices', isAuth, isUser, bookingController.getBookings);
 
 
 // Post New Booking
-router.post('/booking', [
+router.post('/booking', isAuth,isUser,[
     body('firstName').custom((value) => {
         if (value === '') {
             throw new Error(`Please enter your first name`);
@@ -92,9 +93,9 @@ router.post('/booking', [
 ], bookingController.postBooking);
 
 // Edit Booking
-router.get('/editBooking/:bookingId', bookingController.getEditBooking);
+router.get('/editBooking/:bookingId',isAuth,isUser, bookingController.getEditBooking);
 // Edit Booking Post Request
-router.post('/editBooking', [
+router.post('/editBooking',isAuth,isUser, [
     body('firstName').custom((value) => {
         if (value === '') {
             throw new Error(`Please enter your first name`);
@@ -160,8 +161,10 @@ router.post('/editBooking', [
 ], bookingController.postEditBooking);
 
 // Delete Booking
-router.post('/deleteBooking',bookingController.deleteBooking);
-router.post('/acceptBooking',bookingController.acceptBooking);
-router.post('/completeRequest',bookingController.bookingCompleted);
+router.post('/deleteBooking',isAuth,bookingController.deleteBooking);
+// Accept Booking
+router.post('/acceptBooking',isAuth,isCleaner,bookingController.acceptBooking);
+// Complete Booking
+router.post('/completeRequest',isAuth,isCleaner,bookingController.bookingCompleted);
 exports.router = router;
 

@@ -11,15 +11,15 @@
         <ul>
             <li>
                 <a href="/dashboard"><i class="fa-solid fa-grip"></i></i> &nbsp; Dashboard</a>
-                <%if(user.userType==='user'){%>
+                <%if(user.userType==='user' && path!=='/userDetails'){%>
                     <a href="/booking"><i class="fa-solid fa-plus"></i> &nbsp; Book Service</a>
                     <a href="/manageServices"><i class="fa-solid fa-cubes"></i> &nbsp; My Bookings</a>
                     <%}%>
-                        <%if(user.userType==='cleaner' || user.userType==='admin'){%>
+                        <%if(user.userType==='cleaner' || user.userType==='admin' || path==='/userDetails'){%>
                             <a href="/requests"><i class="fa-solid fa-user-plus"></i> &nbsp; Requests</a>
                             <a href="/myCustomers"><i class="fa-solid fa-circle-check"></i> &nbsp; My Customers</a>
                             <%}%>
-                                <%if(user.userType==='admin'){%>
+                                <%if(user.userType==='admin' || path==='/userDetails'){%>
                                     <a href="/users"><i class="fa-solid fa-users"></i> &nbsp; Users</a>
                                     <a href="/cleaners"><i class="fa-solid fa-user-tie"></i> &nbsp; Cleaners</a>
                                     <%}%>

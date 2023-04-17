@@ -45,7 +45,7 @@ exports.getUserDetails = (req, res, next) => {
                 .then(bookings => {
                     return res.render('dashboardIncludes/userDetails', {
                         pageTitle: 'User Detials',
-                        path: '/user',
+                        path: '/userDetails',
                         user: userDetail,
                         bookings: bookings
                     })
